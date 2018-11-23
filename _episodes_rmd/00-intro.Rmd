@@ -175,23 +175,6 @@ reset your working directory. However, your scripts should not include this line
 because it will fail on someone else's computer.
 
 
-### Downloading the data and getting set up
-
-For this lesson we will use the following folders in our working directory: **`data/`**, **`data_output/`** and **`fig_output/`**. Let's write them all in lowercase to be consistent. We can create them using the RStudio interface by clicking on the "New Folder" button in the file pane (bottom right), or directly from R by typing at console:
-
-```{r create-dirs, eval=FALSE}
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
-```
-
-Go to the Fighare page for this curriculum, and download the dataset called "`SAFI_clean.csv`". The direct download link is: <https://ndownloader.figshare.com/files/11492171>. Place this downloaded file in the `data/` you just created. You can do this directly from R by copying and pasting this in your terminal (your instructor can place this chunk of code in the Etherpad):
-
-```{r download-data, eval=FALSE}
-download.file("https://ndownloader.figshare.com/files/11492171",
-              "data/SAFI_clean.csv", mode = "wb")
-```
-
 ## Interacting with R
 
 The basis of programming is that we write down instructions for the computer to

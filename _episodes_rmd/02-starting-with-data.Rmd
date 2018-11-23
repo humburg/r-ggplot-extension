@@ -31,6 +31,18 @@ knitr_fig_path("02-")
 source("../bin/download_data.R")
 ```
 
+## Downloading the data and getting set up
+
+For this lesson we will import an RStudio project (including the required data) from GitHub. Go to the menu and click on
+*File* > *New Project...* > *Version Control* > *Git*
+
+![](../fig/R_02_clone_project.png)
+
+The easiest way to get the right repository URL is to copy it from GitHub.
+You can find the repository at [](https://github.com/humburg/data-carpentry-r).
+
+![](../fig/R_02_repo_url.png)
+
 ## Presentation of the SAFI Data
 
 SAFI (Studying African Farmer-Led Irrigation) is a study looking at farming
