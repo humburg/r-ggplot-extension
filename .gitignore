@@ -9,3 +9,4 @@ _site
 .Rhistory
 .RData
 
+_episodes_rmd/data/SAFI_clean.csv
