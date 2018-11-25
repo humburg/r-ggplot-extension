@@ -68,7 +68,7 @@ To learn more about **`dplyr`** and **`tidyr`** after the workshop, you may want
 
 To make sure, everyone will use the same dataset for this lesson, we'll read again the SAFI dataset that we downloaded earlier.
 
-```{r, results = 'hide', purl = FALSE, message=FALSE}
+```{r, results = 'hide', purl = FALSE, message=FALSE, warning=FALSE}
 
 ## load the tidyverse
 library(tidyverse)
