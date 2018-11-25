@@ -31,6 +31,18 @@ knitr_fig_path("02-")
 source("../bin/download_data.R")
 ```
 
+## Downloading the data and getting set up
+
+For this lesson we will import an RStudio project (including the required data) from GitHub. Go to the menu and click on
+*File* > *New Project...* > *Version Control* > *Git*
+
+![](../fig/R_02_clone_project.png)
+
+The easiest way to get the right repository URL is to copy it from GitHub.
+You can find the repository at [](https://github.com/humburg/data-carpentry-r).
+
+![](../fig/R_02_repo_url.png)
+
 ## Presentation of the SAFI Data
 
 SAFI (Studying African Farmer-Led Irrigation) is a study looking at farming
@@ -66,7 +78,7 @@ represent:
 
 You are going load the data in R's memory using the function `read_csv()` from the **`readr`** package which is part of the **`tidyverse`**. So, before we can use the `read_csv()` function, we need to load the package. Also, if you recall, the missing data is encoded as "NULL" in the dataset. We'll tell it to the function, so R will automatically convert all the "NULL" entries in the dataset into `NA`.
 
-```{r, eval=TRUE,  message=FALSE, purl=FALSE}
+```{r, eval=TRUE,  message=FALSE, purl=FALSE, warning=FALSE}
 library(tidyverse)
 interviews <- read_csv("data/SAFI_clean.csv", na = "NULL")
 ```
@@ -396,7 +408,7 @@ We are going to use the package **`lubridate`** (which belongs to the **`tidyver
 
 Start by loading the required package:
 
-```{r load-package, message=FALSE, purl=FALSE}
+```{r load-package, message=FALSE, warning=FALSE, purl=FALSE}
 library(lubridate)
 ```
 

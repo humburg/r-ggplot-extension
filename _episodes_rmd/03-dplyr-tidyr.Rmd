@@ -68,10 +68,11 @@ To learn more about **`dplyr`** and **`tidyr`** after the workshop, you may want
 
 To make sure, everyone will use the same dataset for this lesson, we'll read again the SAFI dataset that we downloaded earlier.
 
-```{r, results = 'hide', purl = FALSE, message=FALSE}
+```{r, results = 'hide', purl = FALSE, message=FALSE, warning=FALSE}
 
 ## load the tidyverse
 library(tidyverse)
+library(lubridate)
 
 interviews <- read_csv("data/SAFI_clean.csv", na = "NULL")
 
@@ -381,9 +382,9 @@ interviews %>%
 > > ```{r}
 > > # if not already included, add month, year, and day columns
 > > interviews %>%
-> >     mutate(month = month(date),
-> >            day = day(date),
-> >            year = year(date)) %>%
+> >     mutate(month = month(interview_date),
+> >            day = day(interview_date),
+> >            year = year(interview_date)) %>%
 > >     group_by(year, month) %>%
 > >     summarize(max_no_membrs = max(no_membrs))
 > > ```
@@ -607,28 +608,28 @@ interviews_items_owned %>%
 
 > ## Exercise
 >
-> 1. Create a new data frame (named `interviews_months_no_water`) that has one
+> 1. Create a new data frame (named `interviews_months_no_food`) that has one
 > column for each month and records `TRUE` or `FALSE` for whether each interview
-> respondent was lacking water in that month.
+> respondent was lacking food in that month.
 >
 > > ## Solution
 > >
 > > ```{r}
-> > interviews_months_no_water <- interviews %>%
-> >   mutate(split_months = strsplit(months_no_water, ";")) %>%
+> > interviews_months_no_food <- interviews %>%
+> >   mutate(split_months = strsplit(months_lack_food, ";")) %>%
 > >   unnest() %>%
-> >   mutate(months_no_water_logical  = TRUE) %>%
-> >   spread(key = split_months, value = months_no_water_logical, fill = FALSE)
+> >   mutate(months_lack_food_logical  = TRUE) %>%
+> >   spread(key = split_months, value = months_lack_food_logical, fill = FALSE)
 > > ```
 > {: .solution}
 >
-> 2. How many months (on average) were respondents without water if
+> 2. How many months (on average) were respondents without food if
 > they did belong to an irrigation association? What about if they didn't?
 >
 > > ## Solution
 > >
 > > ```{r}
-> > interviews_months_no_water %>%
+> > interviews_months_no_food %>%
 > >   mutate(number_months = rowSums(select(., Apr:Sept))) %>%
 > >   group_by(memb_assoc) %>%
 > >   summarize(mean_months = mean(number_months))

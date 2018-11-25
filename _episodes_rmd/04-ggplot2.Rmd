@@ -31,7 +31,7 @@ source("../bin/download_data.R")
 We start by loading the required package. **`ggplot2`** is also included in the
 **`tidyverse`** package.
 
-```{r load-package, message=FALSE, purl=FALSE}
+```{r load-package, message=FALSE, purl=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 
@@ -260,7 +260,7 @@ hidden?
 > > ```{r boxplot-exercise-factor}
 > > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(aes(alpha = 0.5, color = memb_assoc))
+> >   geom_jitter(aes(color = memb_assoc), alpha = 0.5)
 > > ```
 > {: .solution}
 {: .challenge}

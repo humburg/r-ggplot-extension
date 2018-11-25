@@ -70,6 +70,7 @@ To make sure, everyone will use the same dataset for this lesson, we'll read aga
 ~~~
 ## load the tidyverse
 library(tidyverse)
+library(lubridate)
 
 interviews <- read_csv("data/SAFI_clean.csv", na = "NULL")
 
@@ -114,7 +115,7 @@ filter(interviews, village == "God")
 
 ~~~
 # A tibble: 43 x 14
-   key_ID village interview_date      no_membrs years_liv respondent_wall…
+   key_ID village interview_date      no_membrs years_liv respondent_wall~
     <int> <chr>   <dttm>                  <int>     <int> <chr>           
  1      1 God     2016-11-17 00:00:00         3         4 muddaub         
  2      1 God     2016-11-17 00:00:00         7         9 muddaub         
@@ -304,7 +305,7 @@ interviews %>%
 
 ~~~
 # A tibble: 131 x 15
-   key_ID village interview_date      no_membrs years_liv respondent_wall…
+   key_ID village interview_date      no_membrs years_liv respondent_wall~
     <int> <chr>   <dttm>                  <int>     <int> <chr>           
  1      1 God     2016-11-17 00:00:00         3         4 muddaub         
  2      1 God     2016-11-17 00:00:00         7         9 muddaub         
@@ -313,9 +314,9 @@ interviews %>%
  5      5 God     2016-11-17 00:00:00         7        40 burntbricks     
  6      6 God     2016-11-17 00:00:00         3         3 muddaub         
  7      7 God     2016-11-17 00:00:00         6        38 muddaub         
- 8      8 Chirod… 2016-11-16 00:00:00        12        70 burntbricks     
- 9      9 Chirod… 2016-11-16 00:00:00         8         6 burntbricks     
-10     10 Chirod… 2016-12-16 00:00:00        12        23 burntbricks     
+ 8      8 Chirod~ 2016-11-16 00:00:00        12        70 burntbricks     
+ 9      9 Chirod~ 2016-11-16 00:00:00         8         6 burntbricks     
+10     10 Chirod~ 2016-12-16 00:00:00        12        23 burntbricks     
 # ... with 121 more rows, and 9 more variables: rooms <int>,
 #   memb_assoc <chr>, affect_conflicts <chr>, liv_count <int>,
 #   items_owned <chr>, no_meals <int>, months_lack_food <chr>,
@@ -344,13 +345,13 @@ interviews %>%
 
 ~~~
 # A tibble: 92 x 15
-   key_ID village interview_date      no_membrs years_liv respondent_wall…
+   key_ID village interview_date      no_membrs years_liv respondent_wall~
     <int> <chr>   <dttm>                  <int>     <int> <chr>           
  1      1 God     2016-11-17 00:00:00         7         9 muddaub         
  2      7 God     2016-11-17 00:00:00         6        38 muddaub         
- 3      8 Chirod… 2016-11-16 00:00:00        12        70 burntbricks     
- 4      9 Chirod… 2016-11-16 00:00:00         8         6 burntbricks     
- 5     10 Chirod… 2016-12-16 00:00:00        12        23 burntbricks     
+ 3      8 Chirod~ 2016-11-16 00:00:00        12        70 burntbricks     
+ 4      9 Chirod~ 2016-11-16 00:00:00         8         6 burntbricks     
+ 5     10 Chirod~ 2016-12-16 00:00:00        12        23 burntbricks     
  6     12 God     2016-11-21 00:00:00         7        20 burntbricks     
  7     13 God     2016-11-21 00:00:00         6         8 burntbricks     
  8     15 God     2016-11-21 00:00:00         5        30 sunbricks       
@@ -692,9 +693,9 @@ interviews %>%
 > > ~~~
 > > # if not already included, add month, year, and day columns
 > > interviews %>%
-> >     mutate(month = month(date),
-> >            day = day(date),
-> >            year = year(date)) %>%
+> >     mutate(month = month(interview_date),
+> >            day = day(interview_date),
+> >            year = year(interview_date)) %>%
 > >     group_by(year, month) %>%
 > >     summarize(max_no_membrs = max(no_membrs))
 > > ~~~
@@ -703,9 +704,17 @@ interviews %>%
 > > 
 > > 
 > > ~~~
-> > Error in mutate_impl(.data, dots): Evaluation error: could not find function "month".
+> > # A tibble: 5 x 3
+> > # Groups:   year [?]
+> >    year month max_no_membrs
+> >   <dbl> <dbl>         <dbl>
+> > 1  2016    11            19
+> > 2  2016    12            12
+> > 3  2017     4            17
+> > 4  2017     5            15
+> > 5  2017     6            15
 > > ~~~
-> > {: .error}
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
@@ -980,38 +989,31 @@ interviews_items_owned %>%
 
 > ## Exercise
 >
-> 1. Create a new data frame (named `interviews_months_no_water`) that has one
+> 1. Create a new data frame (named `interviews_months_no_food`) that has one
 > column for each month and records `TRUE` or `FALSE` for whether each interview
-> respondent was lacking water in that month.
+> respondent was lacking food in that month.
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > interviews_months_no_water <- interviews %>%
-> >   mutate(split_months = strsplit(months_no_water, ";")) %>%
+> > interviews_months_no_food <- interviews %>%
+> >   mutate(split_months = strsplit(months_lack_food, ";")) %>%
 > >   unnest() %>%
-> >   mutate(months_no_water_logical  = TRUE) %>%
-> >   spread(key = split_months, value = months_no_water_logical, fill = FALSE)
+> >   mutate(months_lack_food_logical  = TRUE) %>%
+> >   spread(key = split_months, value = months_lack_food_logical, fill = FALSE)
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in mutate_impl(.data, dots): Evaluation error: object 'months_no_water' not found.
-> > ~~~
-> > {: .error}
 > {: .solution}
 >
-> 2. How many months (on average) were respondents without water if
+> 2. How many months (on average) were respondents without food if
 > they did belong to an irrigation association? What about if they didn't?
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > interviews_months_no_water %>%
+> > interviews_months_no_food %>%
 > >   mutate(number_months = rowSums(select(., Apr:Sept))) %>%
 > >   group_by(memb_assoc) %>%
 > >   summarize(mean_months = mean(number_months))
@@ -1021,9 +1023,14 @@ interviews_items_owned %>%
 > > 
 > > 
 > > ~~~
-> > Error in eval(lhs, parent, parent): object 'interviews_months_no_water' not found
+> > # A tibble: 3 x 2
+> >   memb_assoc mean_months
+> >   <chr>            <dbl>
+> > 1 no                2.31
+> > 2 yes               2.64
+> > 3 <NA>              2.95
 > > ~~~
-> > {: .error}
+> > {: .output}
 > {: .solution}
 {: .challenge}
 

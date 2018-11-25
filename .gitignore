@@ -9,3 +9,5 @@ _site
 .Rhistory
 .RData
 
+_episodes_rmd/data/SAFI_clean.csv
+_episodes_rmd/data_output/interviews_plotting.csv

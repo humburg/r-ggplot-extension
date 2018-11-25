@@ -348,7 +348,7 @@ hidden?
 > > ~~~
 > > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(aes(alpha = 0.5, color = memb_assoc))
+> >   geom_jitter(aes(color = memb_assoc), alpha = 0.5)
 > > ~~~
 > > {: .language-r}
 > > 
