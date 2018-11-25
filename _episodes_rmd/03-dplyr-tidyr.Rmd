@@ -72,6 +72,7 @@ To make sure, everyone will use the same dataset for this lesson, we'll read aga
 
 ## load the tidyverse
 library(tidyverse)
+library(lubridate)
 
 interviews <- read_csv("data/SAFI_clean.csv", na = "NULL")
 
@@ -381,9 +382,9 @@ interviews %>%
 > > ```{r}
 > > # if not already included, add month, year, and day columns
 > > interviews %>%
-> >     mutate(month = month(date),
-> >            day = day(date),
-> >            year = year(date)) %>%
+> >     mutate(month = month(interview_date),
+> >            day = day(interview_date),
+> >            year = year(interview_date)) %>%
 > >     group_by(year, month) %>%
 > >     summarize(max_no_membrs = max(no_membrs))
 > > ```
