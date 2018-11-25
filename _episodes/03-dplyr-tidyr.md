@@ -989,38 +989,31 @@ interviews_items_owned %>%
 
 > ## Exercise
 >
-> 1. Create a new data frame (named `interviews_months_no_water`) that has one
+> 1. Create a new data frame (named `interviews_months_no_food`) that has one
 > column for each month and records `TRUE` or `FALSE` for whether each interview
-> respondent was lacking water in that month.
+> respondent was lacking food in that month.
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > interviews_months_no_water <- interviews %>%
-> >   mutate(split_months = strsplit(months_no_water, ";")) %>%
+> > interviews_months_no_food <- interviews %>%
+> >   mutate(split_months = strsplit(months_lack_food, ";")) %>%
 > >   unnest() %>%
-> >   mutate(months_no_water_logical  = TRUE) %>%
-> >   spread(key = split_months, value = months_no_water_logical, fill = FALSE)
+> >   mutate(months_lack_food_logical  = TRUE) %>%
+> >   spread(key = split_months, value = months_lack_food_logical, fill = FALSE)
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in mutate_impl(.data, dots): Evaluation error: object 'months_no_water' not found.
-> > ~~~
-> > {: .error}
 > {: .solution}
 >
-> 2. How many months (on average) were respondents without water if
+> 2. How many months (on average) were respondents without food if
 > they did belong to an irrigation association? What about if they didn't?
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > interviews_months_no_water %>%
+> > interviews_months_no_food %>%
 > >   mutate(number_months = rowSums(select(., Apr:Sept))) %>%
 > >   group_by(memb_assoc) %>%
 > >   summarize(mean_months = mean(number_months))
@@ -1030,9 +1023,14 @@ interviews_items_owned %>%
 > > 
 > > 
 > > ~~~
-> > Error in eval(lhs, parent, parent): object 'interviews_months_no_water' not found
+> > # A tibble: 3 x 2
+> >   memb_assoc mean_months
+> >   <chr>            <dbl>
+> > 1 no                2.31
+> > 2 yes               2.64
+> > 3 <NA>              2.95
 > > ~~~
-> > {: .error}
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
