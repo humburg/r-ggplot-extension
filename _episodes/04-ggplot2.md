@@ -35,48 +35,6 @@ library(tidyverse)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Warning: package 'tidyverse' was built under R version 3.5.1
-~~~
-{: .error}
-
-
-
-~~~
-Warning: package 'ggplot2' was built under R version 3.5.1
-~~~
-{: .error}
-
-
-
-~~~
-Warning: package 'tidyr' was built under R version 3.5.1
-~~~
-{: .error}
-
-
-
-~~~
-Warning: package 'readr' was built under R version 3.5.1
-~~~
-{: .error}
-
-
-
-~~~
-Warning: package 'dplyr' was built under R version 3.5.1
-~~~
-{: .error}
-
-
-
-~~~
-Warning: package 'forcats' was built under R version 3.5.1
-~~~
-{: .error}
-
 If not still in the workspace, load the data we saved in the previous lesson.
 
 
@@ -390,7 +348,7 @@ hidden?
 > > ~~~
 > > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(aes(alpha = 0.5, color = memb_assoc))
+> >   geom_jitter(aes(color = memb_assoc), alpha = 0.5)
 > > ~~~
 > > {: .language-r}
 > > 
