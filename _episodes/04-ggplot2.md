@@ -35,6 +35,48 @@ library(tidyverse)
 ~~~
 {: .language-r}
 
+
+
+~~~
+Warning: package 'tidyverse' was built under R version 3.5.1
+~~~
+{: .error}
+
+
+
+~~~
+Warning: package 'ggplot2' was built under R version 3.5.1
+~~~
+{: .error}
+
+
+
+~~~
+Warning: package 'tidyr' was built under R version 3.5.1
+~~~
+{: .error}
+
+
+
+~~~
+Warning: package 'readr' was built under R version 3.5.1
+~~~
+{: .error}
+
+
+
+~~~
+Warning: package 'dplyr' was built under R version 3.5.1
+~~~
+{: .error}
+
+
+
+~~~
+Warning: package 'forcats' was built under R version 3.5.1
+~~~
+{: .error}
+
 If not still in the workspace, load the data we saved in the previous lesson.
 
 
