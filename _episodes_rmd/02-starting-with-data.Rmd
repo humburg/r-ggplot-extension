@@ -340,61 +340,63 @@ vector `year_fct` inside the square brackets
 
 When your data is stored as a factor, you can use the `plot()` function to get a
 quick glance at the number of observations represented by each factor level.
-Let's extract the `memb_assoc` column from our data frame, convert it into a
+Let's extract the `affect_conflicts` column from our data frame, convert it into a
 factor, and use it to look at the number of interview respondents who were or
 were not members of an irrigation association:
 
 ```{r factor-plot-default-order, purl=TRUE}
-## create a vector from the data frame column "memb_assoc"
-memb_assoc <- interviews$memb_assoc
+## create a vector from the data frame column "affect_conflicts"
+affect_conflicts <- interviews$affect_conflicts
 ## convert it into a factor
-memb_assoc <- as.factor(memb_assoc)
+affect_conflicts <- as.factor(affect_conflicts)
 ## let's see what it looks like
-memb_assoc
+affect_conflicts
 ## bar plot of the number of interview respondents who were
-## members of irrigation association:
-plot(memb_assoc)
+## affected by conflicts with different frequency:
+plot(affect_conflicts)
 ```
 
-Looking at the plot compared to the output of the vector, we can see that n
-addition to "no"s and "yes"s, there are about some respondents for which the
-information about whether they were part of an irrigation association hasn't
-been recorded, and encoded as missing data. They do not appear on the plot.
+Looking at the plot compared to the output of the vector, we can see that in
+addition to "never", "once", "more_once" and "frequently", there are some
+respondents for which the information about how much they were affected by 
+conflicts hasn't been recorded, and encoded as missing data. They do not appear on the plot.
 Let's encode them differently so they can counted and visualized in our plot.
 
 
 ```{r factor-plot-reorder, purl=TRUE}
-## Let's recreate the vector from the data frame column "memb_assoc"
-memb_assoc <- interviews$memb_assoc
+## Let's recreate the vector from the data frame column "affect_conflicts"
+affect_conflicts <- interviews$affect_conflicts
 ## replace the missing data with "undetermined"
-memb_assoc[is.na(memb_assoc)] <- "undetermined"
+affect_conflicts[is.na(affect_conflicts)] <- "undetermined"
 ## convert it into a factor
-memb_assoc <- as.factor(memb_assoc)
+affect_conflicts <- as.factor(affect_conflicts)
 ## let's see what it looks like
-memb_assoc
+affect_conflicts
 ## bar plot of the number of interview respondents who were
-## members of irrigation association:
-plot(memb_assoc)
+## affected by conflicts with different frequency:
+plot(affect_conflicts)
 ```
 
 
 > ## Exercise
 >
-> * Rename the levels of the factor to have the first letter in uppercase:
->   "No","Undetermined", and "Yes". 
+> * Rename the factor level "more_once" to "more than once". 
 >
-> * Now that we have renamed the factor level to "Undetermined", can you
->   recreate the barplot such that "Undetermined" is last (after "Yes")?
+> * Can you recreate the barplot such that factor levels are ordered from
+>   least to most frequent (placing "undetermined" last)?
 >
 > > ## Solution
 > >
 > > ```{r factor-plot-exercise}
-> > levels(memb_assoc) <- c("No", "Undetermined", "Yes")
-> > memb_assoc <- factor(memb_assoc, levels = c("No", "Yes", "Undetermined"))
-> > plot(memb_assoc)
+> > levels(affect_conflicts)[2] <- "more than once"
+> > affect_conflicts <- factor(affect_conflicts, levels = c("never", "once", "more than once", "frequently", "undetermined"))
+> > plot(affect_conflicts)
 > ```
 > {: .solution}
 {: .challenge}
+
+Now that you have created this plot, it may be a good time to commit the changes you
+made to the R script to your git repository.
 
 
 ## Formatting Dates

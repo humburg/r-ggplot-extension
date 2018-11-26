@@ -668,35 +668,47 @@ vector `year_fct` inside the square brackets
 
 When your data is stored as a factor, you can use the `plot()` function to get a
 quick glance at the number of observations represented by each factor level.
-Let's extract the `memb_assoc` column from our data frame, convert it into a
+Let's extract the `affect_conflicts` column from our data frame, convert it into a
 factor, and use it to look at the number of interview respondents who were or
 were not members of an irrigation association:
 
 
 ~~~
-## create a vector from the data frame column "memb_assoc"
-memb_assoc <- interviews$memb_assoc
+## create a vector from the data frame column "affect_conflicts"
+affect_conflicts <- interviews$affect_conflicts
 ## convert it into a factor
-memb_assoc <- as.factor(memb_assoc)
+affect_conflicts <- as.factor(affect_conflicts)
 ## let's see what it looks like
-memb_assoc
+affect_conflicts
 ~~~
 {: .language-r}
 
 
 
 ~~~
-  [1] <NA> yes  <NA> <NA> <NA> <NA> no   yes  no   no   <NA> yes  no   <NA>
- [15] yes  <NA> <NA> <NA> <NA> <NA> no   <NA> <NA> no   no   no   <NA> no  
- [29] yes  <NA> <NA> yes  no   yes  yes  yes  <NA> yes  <NA> yes  <NA> no  
- [43] no   <NA> no   no   yes  <NA> <NA> yes  <NA> no   yes  no   <NA> yes 
- [57] no   no   <NA> no   yes  <NA> <NA> <NA> no   yes  no   no   no   no  
- [71] yes  <NA> no   yes  <NA> <NA> yes  no   no   yes  no   no   yes  no  
- [85] yes  no   no   <NA> yes  yes  yes  yes  yes  no   no   no   no   yes 
- [99] no   no   yes  yes  no   <NA> no   no   <NA> no   no   <NA> no   <NA>
-[113] <NA> no   no   no   no   yes  no   no   no   no   no   no   no   no  
-[127] no   no   no   yes  <NA>
-Levels: no yes
+  [1] <NA>       once       <NA>       <NA>       <NA>       <NA>      
+  [7] never      never      never      never      <NA>       never     
+ [13] never      <NA>       once       <NA>       <NA>       <NA>      
+ [19] <NA>       <NA>       never      <NA>       <NA>       never     
+ [25] never      never      <NA>       more_once  frequently <NA>      
+ [31] <NA>       more_once  more_once  more_once  more_once  once      
+ [37] <NA>       never      <NA>       never      <NA>       never     
+ [43] never      <NA>       never      once       once       <NA>      
+ [49] <NA>       never      <NA>       never      frequently never     
+ [55] <NA>       never      never      never      <NA>       never     
+ [61] more_once  <NA>       <NA>       <NA>       once       frequently
+ [67] more_once  more_once  more_once  more_once  more_once  <NA>      
+ [73] never      once       <NA>       <NA>       frequently more_once 
+ [79] never      more_once  more_once  more_once  more_once  never     
+ [85] more_once  more_once  never      <NA>       more_once  more_once 
+ [91] more_once  more_once  never      never      never      never     
+ [97] never      frequently more_once  more_once  never      frequently
+[103] never      <NA>       never      never      <NA>       more_once 
+[109] never      <NA>       never      <NA>       <NA>       frequently
+[115] frequently never      never      frequently never      never     
+[121] never      never      never      never      never      once      
+[127] more_once  more_once  more_once  more_once  <NA>      
+Levels: frequently more_once never once
 ~~~
 {: .output}
 
@@ -704,64 +716,64 @@ Levels: no yes
 
 ~~~
 ## bar plot of the number of interview respondents who were
-## members of irrigation association:
-plot(memb_assoc)
+## affected by conflicts with different frequency:
+plot(affect_conflicts)
 ~~~
 {: .language-r}
 
 <img src="../fig/rmd-02-factor-plot-default-order-1.png" title="plot of chunk factor-plot-default-order" alt="plot of chunk factor-plot-default-order" width="612" style="display: block; margin: auto;" />
 
-Looking at the plot compared to the output of the vector, we can see that n
-addition to "no"s and "yes"s, there are about some respondents for which the
-information about whether they were part of an irrigation association hasn't
-been recorded, and encoded as missing data. They do not appear on the plot.
+Looking at the plot compared to the output of the vector, we can see that in
+addition to "never", "once", "more_once" and "frequently", there are some
+respondents for which the information about how much they were affected by 
+conflicts hasn't been recorded, and encoded as missing data. They do not appear on the plot.
 Let's encode them differently so they can counted and visualized in our plot.
 
 
 
 ~~~
-## Let's recreate the vector from the data frame column "memb_assoc"
-memb_assoc <- interviews$memb_assoc
+## Let's recreate the vector from the data frame column "affect_conflicts"
+affect_conflicts <- interviews$affect_conflicts
 ## replace the missing data with "undetermined"
-memb_assoc[is.na(memb_assoc)] <- "undetermined"
+affect_conflicts[is.na(affect_conflicts)] <- "undetermined"
 ## convert it into a factor
-memb_assoc <- as.factor(memb_assoc)
+affect_conflicts <- as.factor(affect_conflicts)
 ## let's see what it looks like
-memb_assoc
+affect_conflicts
 ~~~
 {: .language-r}
 
 
 
 ~~~
-  [1] undetermined yes          undetermined undetermined undetermined
-  [6] undetermined no           yes          no           no          
- [11] undetermined yes          no           undetermined yes         
+  [1] undetermined once         undetermined undetermined undetermined
+  [6] undetermined never        never        never        never       
+ [11] undetermined never        never        undetermined once        
  [16] undetermined undetermined undetermined undetermined undetermined
- [21] no           undetermined undetermined no           no          
- [26] no           undetermined no           yes          undetermined
- [31] undetermined yes          no           yes          yes         
- [36] yes          undetermined yes          undetermined yes         
- [41] undetermined no           no           undetermined no          
- [46] no           yes          undetermined undetermined yes         
- [51] undetermined no           yes          no           undetermined
- [56] yes          no           no           undetermined no          
- [61] yes          undetermined undetermined undetermined no          
- [66] yes          no           no           no           no          
- [71] yes          undetermined no           yes          undetermined
- [76] undetermined yes          no           no           yes         
- [81] no           no           yes          no           yes         
- [86] no           no           undetermined yes          yes         
- [91] yes          yes          yes          no           no          
- [96] no           no           yes          no           no          
-[101] yes          yes          no           undetermined no          
-[106] no           undetermined no           no           undetermined
-[111] no           undetermined undetermined no           no          
-[116] no           no           yes          no           no          
-[121] no           no           no           no           no          
-[126] no           no           no           no           yes         
+ [21] never        undetermined undetermined never        never       
+ [26] never        undetermined more_once    frequently   undetermined
+ [31] undetermined more_once    more_once    more_once    more_once   
+ [36] once         undetermined never        undetermined never       
+ [41] undetermined never        never        undetermined never       
+ [46] once         once         undetermined undetermined never       
+ [51] undetermined never        frequently   never        undetermined
+ [56] never        never        never        undetermined never       
+ [61] more_once    undetermined undetermined undetermined once        
+ [66] frequently   more_once    more_once    more_once    more_once   
+ [71] more_once    undetermined never        once         undetermined
+ [76] undetermined frequently   more_once    never        more_once   
+ [81] more_once    more_once    more_once    never        more_once   
+ [86] more_once    never        undetermined more_once    more_once   
+ [91] more_once    more_once    never        never        never       
+ [96] never        never        frequently   more_once    more_once   
+[101] never        frequently   never        undetermined never       
+[106] never        undetermined more_once    never        undetermined
+[111] never        undetermined undetermined frequently   frequently  
+[116] never        never        frequently   never        never       
+[121] never        never        never        never        never       
+[126] once         more_once    more_once    more_once    more_once   
 [131] undetermined
-Levels: no undetermined yes
+Levels: frequently more_once never once undetermined
 ~~~
 {: .output}
 
@@ -769,8 +781,8 @@ Levels: no undetermined yes
 
 ~~~
 ## bar plot of the number of interview respondents who were
-## members of irrigation association:
-plot(memb_assoc)
+## affected by conflicts with different frequency:
+plot(affect_conflicts)
 ~~~
 {: .language-r}
 
@@ -779,19 +791,18 @@ plot(memb_assoc)
 
 > ## Exercise
 >
-> * Rename the levels of the factor to have the first letter in uppercase:
->   "No","Undetermined", and "Yes". 
+> * Rename the factor level "more_once" to "more than once". 
 >
-> * Now that we have renamed the factor level to "Undetermined", can you
->   recreate the barplot such that "Undetermined" is last (after "Yes")?
+> * Can you recreate the barplot such that factor levels are ordered from
+>   least to most frequent (placing "undetermined" last)?
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > levels(memb_assoc) <- c("No", "Undetermined", "Yes")
-> > memb_assoc <- factor(memb_assoc, levels = c("No", "Yes", "Undetermined"))
-> > plot(memb_assoc)
+> > levels(affect_conflicts)[2] <- "more than once"
+> > affect_conflicts <- factor(affect_conflicts, levels = c("never", "once", "more than once", "frequently", "undetermined"))
+> > plot(affect_conflicts)
 > > ~~~
 > > {: .language-r}
 > > 
