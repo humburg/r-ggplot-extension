@@ -239,7 +239,7 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 > > ## 3.
 > > # Simple solution
 > > interviews_middle <- interviews[n_rows / 2, ]
-> > # but is this really the middle entry in the middle?
+> > # but is this really the entry in the middle?
 > > # This would be more accurate:
 > > interviews_middle <- interviews[ceiling(n_rows / 2), ]
 > > ## 4.
