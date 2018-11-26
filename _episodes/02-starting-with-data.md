@@ -36,8 +36,9 @@ For this lesson we will import an RStudio project (including the required data) 
 
 ![](../fig/R_02_clone_project.png)
 
+The repository URL RStudio is asking for is [https://github.com/humburg/data-carpentry-r.git](https://github.com/humburg/data-carpentry-r.git).
 The easiest way to get the right repository URL is to copy it from GitHub.
-You can find the repository at [](https://github.com/humburg/data-carpentry-r).
+You can find the GitHub repository at [https://github.com/humburg/data-carpentry-r](https://github.com/humburg/data-carpentry-r).
 
 ![](../fig/R_02_repo_url.png)
 
@@ -165,7 +166,7 @@ the object)
 * `ncol(interviews)` - returns the number of columns
 
 * Content:
-* `head(interviews)` - shows the first 6 rows
+* `head(interviews)` - shows the first 6 rows (useful for `data.frame`s, `tibble`s do this automatically)
 * `tail(interviews)` - shows the last 6 rows
 
 * Names:
@@ -432,8 +433,14 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 > > # Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(interviews)
 > > interviews_last <- interviews[n_rows, ]
+> > # An alternative solution using tail()
+> > interviews_last <- tail(interviews, 1)
 > > ## 3.
+> > # Simple solution
 > > interviews_middle <- interviews[n_rows / 2, ]
+> > # but is this really the middle entry in the middle?
+> > # This would be more accurate:
+> > interviews_middle <- interviews[ceiling(n_rows / 2), ]
 > > ## 4.
 > > interviews_head <- interviews[-(7:n_rows), ]
 > > ~~~
