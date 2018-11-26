@@ -22,7 +22,7 @@ objectives:
 - "Examine and change date formats."
 
 keypoints:
-- "Use read.csv to read tabular data in R."
+- "Use read_csv to read tabular data in R."
 - "Use factors to represent categorical data in R."
 ---
 
@@ -809,6 +809,9 @@ plot(affect_conflicts)
 > > <img src="../fig/rmd-02-factor-plot-exercise-1.png" title="plot of chunk factor-plot-exercise" alt="plot of chunk factor-plot-exercise" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
+
+Now that you have created this plot, it may be a good time to commit the changes you
+made to the R script to your git repository.
 
 
 ## Formatting Dates
