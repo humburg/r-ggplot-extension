@@ -122,6 +122,17 @@ interviews_god <- select(interviews2, no_membrs, years_liv)
 ```
 
 This is readable, but can clutter up your workspace with lots of objects that you have to name individually. With multiple steps, that can be hard to keep track of.
+Alternatively, you can create the final data frame by overwiting the intermediate
+result, reusing the same variable.
+
+```{r, purl=FALSE}
+interviews_god <- filter(interviews, village == "God")
+interviews_god <- select(interviews_god, no_membrs, years_liv)
+```
+
+This avoids cluttering your workspace but can lead to confusion. If only the first
+statement is executed, e.g. because the second one contained a typo, the result
+won't be what you expcted.
 
 You can also nest functions (i.e. one function inside of another), like this:
 
