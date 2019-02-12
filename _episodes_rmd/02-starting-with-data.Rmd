@@ -20,7 +20,7 @@ objectives:
 - "Examine and change date formats."
 
 keypoints:
-- "Use read_csv to read tabular data in R."
+- "Use read.csv to read tabular data in R."
 - "Use factors to represent categorical data in R."
 ---
 
@@ -38,9 +38,8 @@ For this lesson we will import an RStudio project (including the required data) 
 
 ![](../fig/R_02_clone_project.png)
 
-The repository URL RStudio is asking for is [https://github.com/humburg/data-carpentry-r.git](https://github.com/humburg/data-carpentry-r.git).
 The easiest way to get the right repository URL is to copy it from GitHub.
-You can find the GitHub repository at [https://github.com/humburg/data-carpentry-r](https://github.com/humburg/data-carpentry-r).
+You can find the repository at [](https://github.com/humburg/data-carpentry-r).
 
 ![](../fig/R_02_repo_url.png)
 
@@ -141,7 +140,7 @@ the object)
 * `ncol(interviews)` - returns the number of columns
 
 * Content:
-* `head(interviews)` - shows the first 6 rows (useful for `data.frame`s, `tibble`s do this automatically)
+* `head(interviews)` - shows the first 6 rows
 * `tail(interviews)` - shows the last 6 rows
 
 * Names:
@@ -208,7 +207,7 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 > ## Exercise
 >
 > 1. Create a data frame (`interviews_100`) containing only the data in
->    row 100 of the `interviews` dataset.
+>    row 100 of the `surveys` dataset.
 >
 > 2. Notice how `nrow()` gave you the number of rows in a data frame?
 >
@@ -234,14 +233,8 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 > > # Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(interviews)
 > > interviews_last <- interviews[n_rows, ]
-> > # An alternative solution using tail()
-> > interviews_last <- tail(interviews, 1)
 > > ## 3.
-> > # Simple solution
 > > interviews_middle <- interviews[n_rows / 2, ]
-> > # but is this really the entry in the middle?
-> > # This would be more accurate:
-> > interviews_middle <- interviews[ceiling(n_rows / 2), ]
 > > ## 4.
 > > interviews_head <- interviews[-(7:n_rows), ]
 > > ```
@@ -340,63 +333,61 @@ vector `year_fct` inside the square brackets
 
 When your data is stored as a factor, you can use the `plot()` function to get a
 quick glance at the number of observations represented by each factor level.
-Let's extract the `affect_conflicts` column from our data frame, convert it into a
+Let's extract the `memb_assoc` column from our data frame, convert it into a
 factor, and use it to look at the number of interview respondents who were or
 were not members of an irrigation association:
 
 ```{r factor-plot-default-order, purl=TRUE}
-## create a vector from the data frame column "affect_conflicts"
-affect_conflicts <- interviews$affect_conflicts
+## create a vector from the data frame column "memb_assoc"
+memb_assoc <- interviews$memb_assoc
 ## convert it into a factor
-affect_conflicts <- as.factor(affect_conflicts)
+memb_assoc <- as.factor(memb_assoc)
 ## let's see what it looks like
-affect_conflicts
+memb_assoc
 ## bar plot of the number of interview respondents who were
-## affected by conflicts with different frequency:
-plot(affect_conflicts)
+## members of irrigation association:
+plot(memb_assoc)
 ```
 
-Looking at the plot compared to the output of the vector, we can see that in
-addition to "never", "once", "more_once" and "frequently", there are some
-respondents for which the information about how much they were affected by 
-conflicts hasn't been recorded, and encoded as missing data. They do not appear on the plot.
+Looking at the plot compared to the output of the vector, we can see that n
+addition to "no"s and "yes"s, there are about some respondents for which the
+information about whether they were part of an irrigation association hasn't
+been recorded, and encoded as missing data. They do not appear on the plot.
 Let's encode them differently so they can counted and visualized in our plot.
 
 
 ```{r factor-plot-reorder, purl=TRUE}
-## Let's recreate the vector from the data frame column "affect_conflicts"
-affect_conflicts <- interviews$affect_conflicts
+## Let's recreate the vector from the data frame column "memb_assoc"
+memb_assoc <- interviews$memb_assoc
 ## replace the missing data with "undetermined"
-affect_conflicts[is.na(affect_conflicts)] <- "undetermined"
+memb_assoc[is.na(memb_assoc)] <- "undetermined"
 ## convert it into a factor
-affect_conflicts <- as.factor(affect_conflicts)
+memb_assoc <- as.factor(memb_assoc)
 ## let's see what it looks like
-affect_conflicts
+memb_assoc
 ## bar plot of the number of interview respondents who were
-## affected by conflicts with different frequency:
-plot(affect_conflicts)
+## members of irrigation association:
+plot(memb_assoc)
 ```
 
 
 > ## Exercise
 >
-> * Rename the factor level "more_once" to "more than once". 
+> * Rename the levels of the factor to have the first letter in uppercase:
+>   "No","Undetermined", and "Yes". 
 >
-> * Can you recreate the barplot such that factor levels are ordered from
->   least to most frequent (placing "undetermined" last)?
+> * Now that we have renamed the factor level to "Undetermined", can you
+>   recreate the barplot such that "Undetermined" is last (after "Yes")?
 >
 > > ## Solution
 > >
 > > ```{r factor-plot-exercise}
-> > levels(affect_conflicts)[2] <- "more than once"
-> > affect_conflicts <- factor(affect_conflicts, levels = c("never", "once", "more than once", "frequently", "undetermined"))
-> > plot(affect_conflicts)
+> > levels(memb_assoc) <- c("No", "Undetermined", "Yes")
+> > memb_assoc <- factor(memb_assoc, levels = c("No", "Yes", "Undetermined"))
+> > plot(memb_assoc)
 > ```
 > {: .solution}
 {: .challenge}
-
-Now that you have created this plot, it may be a good time to commit the changes you
-made to the R script to your git repository.
 
 
 ## Formatting Dates

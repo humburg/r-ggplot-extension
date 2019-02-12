@@ -5,19 +5,15 @@ title: "Before we Start"
 teaching: 25
 exercises: 15
 questions:
-- "How to find your way around RStudio?"
-- "How to interact with R?"
-- "How to manage your environment?"
-- "How to install packages?"
+- "How do you get a GitHub account?"
+- "How do you use Git with RStudio?"
 objectives:
-- "Install latest version of R."
+- "Register for a GitHub account."
 - "Install latest version of RStudio."
-- "Navigate the RStudio GUI."
-- "Install additional packages using the packages tab."
-- "Install additional packages using R code."
+- "Use RStudio for version control."
 keypoints:
 - "Use RStudio to write and run R programs."
-- "Use `install.packages()` to install packages (libraries)."
+- "Use RStudio to interact with GitHub."
 source: Rmd
 ---
 
@@ -25,30 +21,18 @@ source: Rmd
 
 ## R and RStudio
 
-R is an open source programming language originally designed and implemented by
-statisticians primarily for statistical analysis. It includes high quality
-graphics capabilities and tools for data analysis and reading and writing data
-to/from files.
-
-Because R is open source and is supported by a large community of developers and
-users there is a very large selection of third-party add-on packages which are
-freely available to extend R's native capabilities.
-
-R is a scripted language. Rather than pointing and clicking in a graphical
-environment you write code statements to ask R to do something for you. This has
-the advantage of providing a record of what was done and allows for peer review
-of the work undertaken.
-
-Having this written record, something which is increasingly required as part of
-a publication submission, is also an aid when seeking help with problems.
-
-There are many online resources such as
+You should already be familiar with R, either through participating in a Software
+or Data Carpentry workshop or having learned R some other way. As you are probably
+aware, there are a variety of online resources where you can get help and valuable
+advice. These include
 [stackoverflow](https://stackoverflow.com/questions/tagged/r) and the [RStudio
 Community](https://community.rstudio.com/) which will allow you to seek help
 from peers. Questions which are backed up with [short, reproducible code
 snippets](https://www.tidyverse.org/help/) are more likely to attract knowledgeable responses.
 
-To make it easier to interact with R, we will use RStudio. RStudio is the most popular IDE (Integrated Development Interface), to work with R. An IDE is a software that provide tools to make it easier to program. 
+In this course we will use RStudio to interact with R. RStudio is the most popular IDE (Integrated Development Interface),
+to work with R. An IDE is a software that provide tools to make it easier to program. If you
+haven't used RStudio before, now is a good time to familiarise yourself with the interface.
 
 <figure>
 <img src="../fig/r+rstudio-analogy.jpg" title="RStudio extends what R can do, and make it easier to write R code and interact with R." alt="RStudio extends what R can do, and make it easier to write R code and interact with R." style="display: block; margin: auto;" />
@@ -170,27 +154,39 @@ Directory". Alternatively you can use `setwd("/path/to/working/directory")` to
 reset your working directory. However, your scripts should not include this line
 because it will fail on someone else's computer.
 
+## Cloning an existing project from GitHub
 
-### Downloading the data and getting set up
+Instead of starting a new project from scratch you may wish to use an existing
+project that is available online, e.g. through GitHub. Such a project may provide
+a predefined directory structure containing relevant data as well as R scripts.
+This allows you to build on existing work (either by you or others).
 
-For this lesson we will use the following folders in our working directory: **`data/`**, **`data_output/`** and **`fig_output/`**. Let's write them all in lowercase to be consistent. We can create them using the RStudio interface by clicking on the "New Folder" button in the file pane (bottom right), or directly from R by typing at console:
+### Forking the project repository
 
+During this course we will work with a project from GitHub. To get this setup
+on your laptop, navigate to [https://github.com/humburg/r-ggplot-project](https://github.com/humburg/r-ggplot-project)
+and click on the *Fork* button.
 
-~~~
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
-~~~
-{: .language-r}
+![Forking the workshop's project on GitHub.](../fig/R_00_github_fork.png)
 
-Go to the Fighare page for this curriculum, and download the dataset called "`SAFI_clean.csv`". The direct download link is: <https://ndownloader.figshare.com/files/11492171>. Place this downloaded file in the `data/` you just created. You can do this directly from R by copying and pasting this in your terminal (your instructor can place this chunk of code in the Etherpad):
+This will create a copy of the project in your own GitHub account, allowing
+you to modify it as you see fit and pushing those changes back to GitHub.
 
+### Cloning the project repository
 
-~~~
-download.file("https://ndownloader.figshare.com/files/11492171",
-              "data/SAFI_clean.csv", mode = "wb")
-~~~
-{: .language-r}
+Before you can do any work on this project you'll need a working copy on your
+computer. First, navigate to the GitHub site for your freshly forked repository.
+GitHub should have loaded that for you after completing the forking process.
+Click on the green *Clone or download* button and coppy the displayed url.
+
+![Obtaining the right url to clone the project from GitHub.](../fig/R_00_clone_url.png)
+
+Now, switch back to RStudio and create a new project. Choose *Version Control* and *Git*.
+This should present you with a dialogue where you can enter the details you just copied
+from GitHub.
+
+![Using RStudio to clone a project from GitHub.](../fig/R_02_clone_project.png)
+
 
 ## Interacting with R
 
