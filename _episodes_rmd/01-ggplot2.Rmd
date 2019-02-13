@@ -215,7 +215,7 @@ jitter using the `width` argument.
 
 ```{r reduce-jitter}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(alpha = 0.5, width = 0.25, height=0.25)
+    geom_jitter(alpha = 0.5, width = 0.1, height=0.1)
 ```
 
 We can also add colors for all the points:
