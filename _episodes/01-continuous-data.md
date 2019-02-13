@@ -26,7 +26,7 @@ We start by loading the required package. **`ggplot2`** is also included in the
 
 
 ~~~
-library(ggplot2)
+library(tidyverse)
 ~~~
 {: .language-r}
 
@@ -44,9 +44,35 @@ interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
 
 
 ~~~
-Error in read_csv("data_output/interviews_plotting.csv"): could not find function "read_csv"
+Parsed with column specification:
+cols(
+  .default = col_logical(),
+  key_ID = col_integer(),
+  village = col_character(),
+  interview_date = col_datetime(format = ""),
+  no_membrs = col_integer(),
+  years_liv = col_integer(),
+  respondent_wall_type = col_character(),
+  rooms = col_integer(),
+  memb_assoc = col_character(),
+  affect_conflicts = col_character(),
+  liv_count = col_integer(),
+  items_owned = col_character(),
+  no_meals = col_integer(),
+  months_lack_food = col_character(),
+  instanceID = col_character(),
+  number_month_lack_food = col_integer(),
+  number_items = col_integer()
+)
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+See spec(...) for full column specifications.
+~~~
+{: .output}
 
 Before we proceed to plot the data, let's take a quick look at what we
 just loaded.
@@ -133,12 +159,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-first-ggplot-1.png" title="plot of chunk first-ggplot" alt="plot of chunk first-ggplot" width="612" style="display: block; margin: auto;" />
 
 The `+` in the **`ggplot2`** package is particularly useful because it allows
 you to modify existing `ggplot` objects. This means you can easily set up plot
@@ -193,12 +214,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-create-ggplot-object-1.png" title="plot of chunk create-ggplot-object" alt="plot of chunk create-ggplot-object" width="612" style="display: block; margin: auto;" />
 
 Then, we start modifying this plot to extract more information from it.
 
@@ -227,12 +243,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-adding-transparency-1.png" title="plot of chunk adding-transparency" alt="plot of chunk adding-transparency" width="612" style="display: block; margin: auto;" />
 
 > ## Note
 >
@@ -251,12 +262,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-adding-jitter-1.png" title="plot of chunk adding-jitter" alt="plot of chunk adding-jitter" width="612" style="display: block; margin: auto;" />
 
 That is a bit better but now the points with similar *x* and *y* values are a
 bit difficult to distinguish. We can fix that by reducing the amount of horizontal
@@ -270,12 +276,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-reduce-jitter-1.png" title="plot of chunk reduce-jitter" alt="plot of chunk reduce-jitter" width="612" style="display: block; margin: auto;" />
 
 Now the points for each combination of `no_membrs` and `number_items` form small clusters
 that can be distinguished visually. 
@@ -298,12 +299,7 @@ that can be distinguished visually.
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-01-increase-point-size-1.png" title="plot of chunk increase-point-size" alt="plot of chunk increase-point-size" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -317,12 +313,7 @@ geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, size = 3, color = "blue")
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-adding-colors-1.png" title="plot of chunk adding-colors" alt="plot of chunk adding-colors" width="612" style="display: block; margin: auto;" />
 
 Or to color each village in the plot differently, you could use a vector as an input to the argument **`color`**.
 Because we are now mapping features of the data to a color, instead of setting one color for all points,
@@ -338,12 +329,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-color-by-village-1.png" title="plot of chunk color-by-village" alt="plot of chunk color-by-village" width="612" style="display: block; margin: auto;" />
 
 There appears to be a positive trend between number of household
 members and number of items owned (from the list provided). This trend
@@ -363,12 +349,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-~~~
-{: .error}
+<img src="../fig/rmd-01-regression-line-1.png" title="plot of chunk regression-line" alt="plot of chunk regression-line" width="612" style="display: block; margin: auto;" />
 
 > ## Exercise
 >
@@ -387,12 +368,7 @@ Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)): object 'interviews_plotting' not found
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-01-village-regression-line-1.png" title="plot of chunk village-regression-line" alt="plot of chunk village-regression-line" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -412,12 +388,7 @@ Error in ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = village, y = rooms)): object 'interviews_plotting' not found
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-01-scatter-challenge-1.png" title="plot of chunk scatter-challenge" alt="plot of chunk scatter-challenge" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 

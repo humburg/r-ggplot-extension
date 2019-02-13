@@ -17,6 +17,58 @@ keypoints:
 
 
 
+We start by loading the required package. **`ggplot2`** is also included in the
+**`tidyverse`** package.
+
+
+~~~
+library(tidyverse)
+~~~
+{: .language-r}
+
+If you don't have the data loaded in your current R session you'll have
+to import into R before you can proceed.
+
+
+~~~
+interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
+~~~
+{: .language-r}
+
+
+
+~~~
+Parsed with column specification:
+cols(
+  .default = col_logical(),
+  key_ID = col_integer(),
+  village = col_character(),
+  interview_date = col_datetime(format = ""),
+  no_membrs = col_integer(),
+  years_liv = col_integer(),
+  respondent_wall_type = col_character(),
+  rooms = col_integer(),
+  memb_assoc = col_character(),
+  affect_conflicts = col_character(),
+  liv_count = col_integer(),
+  items_owned = col_character(),
+  no_meals = col_integer(),
+  months_lack_food = col_character(),
+  instanceID = col_character(),
+  number_month_lack_food = col_integer(),
+  number_items = col_integer()
+)
+~~~
+{: .output}
+
+
+
+~~~
+See spec(...) for full column specifications.
+~~~
+{: .output}
+
+
 ## Barplots
 
 Barplots are useful for visualizing categorical data. By default,
@@ -30,12 +82,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type)): could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-barplot-1-1.png" title="plot of chunk barplot-1" alt="plot of chunk barplot-1" width="612" style="display: block; margin: auto;" />
 
 We can use the `fill` aesthetic for the `geom_bar()` geom to color bars by
 the portion of each count that is from each village.
@@ -47,12 +94,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type)): could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-barplot-stack-1.png" title="plot of chunk barplot-stack" alt="plot of chunk barplot-stack" width="612" style="display: block; margin: auto;" />
 
 This creates a stacked bar chart. These are generally more difficult to read
 than side-by-side bars. We can separate the portions of the stacked bar that
@@ -67,12 +109,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type)): could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-barplot-dodge-1.png" title="plot of chunk barplot-dodge" alt="plot of chunk barplot-dodge" width="612" style="display: block; margin: auto;" />
 
 This is a nicer graphic, but we're more likely to be interested in the
 proportion of each housing type in each village than in the actual count of
@@ -94,13 +131,6 @@ percent_wall_type <- interviews_plotting %>%
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in interviews_plotting %>% filter(respondent_wall_type != "cement") %>% : could not find function "%>%"
-~~~
-{: .error}
-
 Now we can use this new data frame to create our plot showing the
 percentage of each house type in each village.
 
@@ -111,12 +141,7 @@ percentage of each house type in each village.
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_wall_type, aes(x = village, y = percent, fill = respondent_wall_type)): could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-barplot-wall-type-1.png" title="plot of chunk barplot-wall-type" alt="plot of chunk barplot-wall-type" width="612" style="display: block; margin: auto;" />
 
 > ## Exercise
 >
@@ -136,30 +161,13 @@ Error in ggplot(percent_wall_type, aes(x = village, y = percent, fill = responde
 > >   group_by(village) %>%
 > >   mutate(percent = n / sum(n)) %>%
 > >   ungroup()
-> > ~~~
-> > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in interviews_plotting %>% filter(!is.na(memb_assoc)) %>% count(village, : could not find function "%>%"
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ggplot(percent_memb_assoc, aes(x = village, y = percent, fill = memb_assoc)) +
 > > geom_bar(stat = "identity", position = "dodge")
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(percent_memb_assoc, aes(x = village, y = percent, fill = memb_assoc)): could not find function "ggplot"
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-02-barplot-memb-assoc-1.png" title="plot of chunk barplot-memb-assoc" alt="plot of chunk barplot-memb-assoc" width="612" style="display: block; margin: auto;" />
 > >
 > > Ruaca had the lowest proportion of members in an irrigation association.
 > {: .solution}
@@ -177,12 +185,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type, : could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-boxplot-1.png" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="612" style="display: block; margin: auto;" />
 
 By adding points to a boxplot, we can have a better idea of the number of
 measurements and of their distribution:
@@ -195,12 +198,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type, : could not find function "ggplot"
-~~~
-{: .error}
+<img src="../fig/rmd-02-boxplot-with-points-1.png" title="plot of chunk boxplot-with-points" alt="plot of chunk boxplot-with-points" width="612" style="display: block; margin: auto;" />
 
 We can see that muddaub houses and sunbrick houses tend to be smaller than
 burntbrick houses.
@@ -228,12 +226,7 @@ hidden?
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type, : could not find function "ggplot"
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-02-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > So far, we've looked at the distribution of room number within wall type. Try
@@ -252,12 +245,7 @@ hidden?
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type, : could not find function "ggplot"
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-02-boxplot-exercise-1.png" title="plot of chunk boxplot-exercise" alt="plot of chunk boxplot-exercise" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > - Add color to the data points on your boxplot according to whether the
@@ -272,12 +260,7 @@ hidden?
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in ggplot(data = interviews_plotting, aes(x = respondent_wall_type, : could not find function "ggplot"
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-02-boxplot-exercise-factor-1.png" title="plot of chunk boxplot-exercise-factor" alt="plot of chunk boxplot-exercise-factor" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 

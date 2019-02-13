@@ -28,7 +28,7 @@ We start by loading the required package. **`ggplot2`** is also included in the
 **`tidyverse`** package.
 
 ```{r load-package, message=FALSE, purl=FALSE, warning=FALSE}
-library(ggplot2)
+library(tidyverse)
 ```
 
 The data is available as part of the project you cloned from GitHub during

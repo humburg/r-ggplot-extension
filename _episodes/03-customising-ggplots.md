@@ -25,7 +25,7 @@ We start by loading the required package. **`ggplot2`** is also included in the
 
 
 ~~~
-library(ggplot2)
+library(tidyverse)
 ~~~
 {: .language-r}
 
@@ -41,9 +41,35 @@ interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
 
 
 ~~~
-Error in read_csv("data_output/interviews_plotting.csv"): could not find function "read_csv"
+Parsed with column specification:
+cols(
+  .default = col_logical(),
+  key_ID = col_integer(),
+  village = col_character(),
+  interview_date = col_datetime(format = ""),
+  no_membrs = col_integer(),
+  years_liv = col_integer(),
+  respondent_wall_type = col_character(),
+  rooms = col_integer(),
+  memb_assoc = col_character(),
+  affect_conflicts = col_character(),
+  liv_count = col_integer(),
+  items_owned = col_character(),
+  no_meals = col_integer(),
+  months_lack_food = col_character(),
+  instanceID = col_character(),
+  number_month_lack_food = col_integer(),
+  number_items = col_integer()
+)
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+See spec(...) for full column specifications.
+~~~
+{: .output}
 
 
 ## Adding Labels and Titles
@@ -150,13 +176,6 @@ percent_items <- interviews_plotting %>%
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in interviews_plotting %>% gather(items, items_owned_logical, bicycle:no_listed_items) %>% : could not find function "%>%"
-~~~
-{: .error}
-
 To calculate this percentage data frame, we needed to use the `case_when()`
 parameter within `mutate()`. In our earlier examples, we knew that each house
 was one and only one of the types specified. However, people can (and do) own
@@ -175,12 +194,7 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_items, aes(x = village, y = percent)): object 'percent_items' not found
-~~~
-{: .error}
+<img src="../fig/rmd-03-percent-items-barplot-1.png" title="plot of chunk percent-items-barplot" alt="plot of chunk percent-items-barplot" width="612" style="display: block; margin: auto;" />
 
 ## **`ggplot2`** themes
 
@@ -225,12 +239,7 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_items, aes(x = village, y = percent)): object 'percent_items' not found
-~~~
-{: .error}
+<img src="../fig/rmd-03-ggplot-customization-1.png" title="plot of chunk ggplot-customization" alt="plot of chunk ggplot-customization" width="612" style="display: block; margin: auto;" />
 
 The axes have more informative names, but their readability can be improved by
 increasing the font size:
@@ -248,12 +257,7 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_items, aes(x = village, y = percent)): object 'percent_items' not found
-~~~
-{: .error}
+<img src="../fig/rmd-03-ggplot-customization-font-size-1.png" title="plot of chunk ggplot-customization-font-size" alt="plot of chunk ggplot-customization-font-size" width="612" style="display: block; margin: auto;" />
 
 Note that it is also possible to change the fonts of your plots. If you are on
 Windows, you may have to install the [**`extrafont`**
@@ -282,12 +286,7 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_items, aes(x = village, y = percent)): object 'percent_items' not found
-~~~
-{: .error}
+<img src="../fig/rmd-03-ggplot-customization-label-orientation-1.png" title="plot of chunk ggplot-customization-label-orientation" alt="plot of chunk ggplot-customization-label-orientation" width="612" style="display: block; margin: auto;" />
 
 If you like the changes you created better than the default theme, you can save
 them as an object to be able to easily apply them to other plots you may create.
@@ -312,12 +311,7 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in ggplot(percent_items, aes(x = village, y = percent)): object 'percent_items' not found
-~~~
-{: .error}
+<img src="../fig/rmd-03-ggplot-custom-themes-1.png" title="plot of chunk ggplot-custom-themes" alt="plot of chunk ggplot-custom-themes" width="612" style="display: block; margin: auto;" />
 
 > ## Exercise
 >
