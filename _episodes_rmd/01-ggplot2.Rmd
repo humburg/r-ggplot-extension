@@ -35,7 +35,9 @@ We start by loading the required package. **`ggplot2`** is also included in the
 library(tidyverse)
 ```
 
-If not still in the workspace, load the data we saved in the previous lesson.
+The data is available as part of the project you cloned from GitHub as part
+of the previous lesson. Switch to that project now if you haven't opened it
+in RStudio already.
 
 
 ```{r load-data, purl=FALSE}
@@ -72,7 +74,25 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 ggplot(data = interviews_plotting)
 ```
 
-- define a mapping (using the aesthetic (`aes`) function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
+- define a mapping (using the aesthetic (`aes`) function), by selecting the variables to be plotted
+  and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as
+  size, shape, color, etc.
+
+> ## Exercise
+> 
+> We would like to inspect the data for a potential relationship between the number of
+> people living in a household (`no_members`) and the number of items owned by that
+> household (`number_items`). What would be a good way to visualise these data?
+>
+> > ## Solution
+> >
+> > Since we are dealing with two continuous variables, a scatterplot seems like
+> > a good starting point. However, both of these variables only take a relatively
+> > small number of discrete values. Under these circumstances a scatterplot may
+> > be problematic. Let's take a look.
+> {: .solution}
+{: .challenge}
+
 
 ```{r ggplot-steps-2, eval=FALSE, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items))
@@ -86,8 +106,8 @@ common ones today, including:
 * `geom_boxplot()` for, well, boxplots!
 * `geom_line()` for trend lines, time series, etc.
 
-To add a geom to the plot use the `+` operator. Because we have two continuous variables,
-let's use `geom_point()` first:
+To add a geom to the plot use the `+` operator. To create a scatterplot we
+want the data to be represented as points, which can be achieved with `geom_point()`:
 
 ```{r first-ggplot, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
@@ -141,13 +161,36 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_point()
 ```
 
-Then, we start modifying this plot to extract more information from it. For
-instance, we can add transparency (`alpha`) to avoid overplotting:
+Then, we start modifying this plot to extract more information from it.
+
+> ## Exercise
+>
+> Because many households share the same values for size and number of items a lot
+> of points in our plot end up on top of each other. That makes it hard to see how
+> common a given combination is. How could we modify the plot to avoid this problem?
+>
+> > ## Solution
+> > 
+> > There are several options, including switching to a different type of plot entirely.
+> > For now, let's strick with a scatterplot. We could improve the plot by adding
+> > transparency to the points. Another option is to add a small amount of jitter to each
+> > point. Together these will avoid most of the overplotting and make it possible to see
+> > overlapping points when it does happen.
+> {: .solution}
+{: .challenge}
+
+We can add transparency using the `alpha` option:
 
 ```{r adding-transparency, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_point(alpha = 0.5)
 ```
+
+> ## Note
+>
+> When setting a mapping to a constant (e.g. `alpha = 0.5` above) these
+> can be set directly, without requiring a call to `aes()`.
+{: .callout}
 
 That only helped a little bit with the overplotting problem. We can also
 introduce a little bit of randomness into the position of our points
@@ -158,6 +201,15 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_jitter(alpha = 0.5)
 ```
 
+That is a bit better but now the points with different *x* values can be able
+bit difficult to distinguish. We can fix that by reducing the amount of horizontal
+jitter using the `width` argument.
+
+
+```{r reduce-jitter}
+ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+    geom_jitter(alpha = 0.5, width = 0.25)
+```
 
 We can also add colors for all the points:
 
@@ -166,7 +218,11 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 geom_jitter(alpha = 0.5, color = "blue")
 ```
 
-Or to color each species in the plot differently, you could use a vector as an input to the argument **`color`**.  Because we are now mapping features of the data to a color, instead of setting one color for all points, the color now needs to be set inside a call to the **`aes`** function. **`ggplot2`** will provide a different color corresponding to different values in the vector. We set the value of **`alpha`** outside of the **`aes`** function call because we are using the same value for all points. Here is an example where we color by **`village`**:
+Or to color each village in the plot differently, you could use a vector as an input to the argument **`color`**.
+Because we are now mapping features of the data to a color, instead of setting one color for all points,
+the color now needs to be set inside a call to the **`aes`** function. **`ggplot2`** will provide a different color
+corresponding to different values in the vector. 
+Here is an example where we color by **`village`**:
 
 
 ```{r color-by-species, purl=FALSE}
