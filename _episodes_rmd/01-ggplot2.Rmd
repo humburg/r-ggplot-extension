@@ -254,7 +254,7 @@ corresponding to different values in the vector.
 Here is an example where we color by **`village`**:
 
 
-```{r color-by-species, purl=FALSE}
+```{r color-by-village, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_jitter(aes(color = village), alpha = 0.5, width = 0.15, height = 0.15)
 ```

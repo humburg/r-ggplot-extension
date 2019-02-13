@@ -334,7 +334,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-color-by-species-1.png" title="plot of chunk color-by-species" alt="plot of chunk color-by-species" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-01-color-by-village-1.png" title="plot of chunk color-by-village" alt="plot of chunk color-by-village" width="612" style="display: block; margin: auto;" />
 
 There appears to be a positive trend between number of household
 members and number of items owned (from the list provided). This trend
