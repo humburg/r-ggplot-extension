@@ -20,6 +20,21 @@ source("../bin/download_data.R")
 set.seed(20190213)
 ```
 
+We start by loading the required package. **`ggplot2`** is also included in the
+**`tidyverse`** package.
+
+```{r load-package, message=FALSE, purl=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+If you don't have the data loaded in your current R session you'll have
+to import into R before you can proceed.
+
+```{r load-data, purl=FALSE}
+interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
+```
+
+
 ## Barplots
 
 Barplots are useful for visualizing categorical data. By default,
