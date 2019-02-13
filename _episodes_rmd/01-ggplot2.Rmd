@@ -44,6 +44,13 @@ in RStudio already.
 interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
 ```
 
+Before we proceed to plot the data, let's take a quick look at what we
+just loaded.
+
+```{r view-data, eval=FALSE}
+View(interviews_plotting)
+```
+
 ## Plotting with **`ggplot2`**
 
 **`ggplot2`** is a plotting package that makes it simple to create complex plots
