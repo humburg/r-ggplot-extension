@@ -26,6 +26,7 @@ keypoints:
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
 source("../bin/download_data.R")
+set.seed(20190213)
 ```
 
 We start by loading the required package. **`ggplot2`** is also included in the
