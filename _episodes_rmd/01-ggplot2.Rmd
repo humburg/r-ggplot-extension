@@ -1,7 +1,7 @@
 ---
 title: "Data visualisation with ggplot2"
-teaching: 80
-exercises: 35
+teaching: 120
+exercises: 60
 questions:
   - "What are the components of a ggplot?"
   - "How do I create scatterplots, boxplots, and barplots?"
@@ -24,7 +24,7 @@ keypoints:
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
-knitr_fig_path("04-")
+knitr_fig_path("01-")
 source("../bin/download_data.R")
 ```
 
