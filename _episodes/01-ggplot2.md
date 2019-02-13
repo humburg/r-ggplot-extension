@@ -79,6 +79,15 @@ See spec(...) for full column specifications.
 ~~~
 {: .output}
 
+Before we proceed to plot the data, let's take a quick look at what we
+just loaded.
+
+
+~~~
+View(interviews_plotting)
+~~~
+{: .language-r}
+
 ## Plotting with **`ggplot2`**
 
 **`ggplot2`** is a plotting package that makes it simple to create complex plots
@@ -260,7 +269,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 
 <img src="../fig/rmd-01-adding-jitter-1.png" title="plot of chunk adding-jitter" alt="plot of chunk adding-jitter" width="612" style="display: block; margin: auto;" />
 
-That is a bit better but now the points with different *x* values can be able
+That is a bit better but now the points with similar *x* and *y* values are a
 bit difficult to distinguish. We can fix that by reducing the amount of horizontal
 jitter using the `width` argument.
 
@@ -268,18 +277,44 @@ jitter using the `width` argument.
 
 ~~~
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(alpha = 0.5, width = 0.25)
+    geom_jitter(alpha = 0.5, width = 0.15, height = 0.15)
 ~~~
 {: .language-r}
 
 <img src="../fig/rmd-01-reduce-jitter-1.png" title="plot of chunk reduce-jitter" alt="plot of chunk reduce-jitter" width="612" style="display: block; margin: auto;" />
+
+Now the points for each combination of `no_membrs` and `number_items` form small clusters
+that can be distinguished visually. 
+
+> ## Exercise
+>
+> It may be possible to enhance the appearance of the plot further by changing
+> the size of the points. Use the `size` argument to change the point size.
+> Combine this with the `width` and `height` arguments to adjust the jitter.
+>
+> Try a few different values. Which one do you like best?
+> > ## Solution
+> >
+> > Here is one possible solution.
+> > 
+> > 
+> > ~~~
+> > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+> >     geom_jitter(alpha = 0.5, width = 0.25, height = 0.25, size = 4)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-01-increase-point-size-1.png" title="plot of chunk increase-point-size" alt="plot of chunk increase-point-size" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
 
 We can also add colors for all the points:
 
 
 ~~~
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-geom_jitter(alpha = 0.5, color = "blue")
+geom_jitter(alpha = 0.5, width = 0.15, height = 0.15, color = "blue")
 ~~~
 {: .language-r}
 
@@ -295,7 +330,7 @@ Here is an example where we color by **`village`**:
 
 ~~~
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(aes(color = village), alpha = 0.5)
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.15, height = 0.15)
 ~~~
 {: .language-r}
 

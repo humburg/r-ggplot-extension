@@ -215,14 +215,36 @@ jitter using the `width` argument.
 
 ```{r reduce-jitter}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(alpha = 0.5, width = 0.1, height=0.1)
+    geom_jitter(alpha = 0.5, width = 0.15, height = 0.15)
 ```
+
+Now the points for each combination of `no_membrs` and `number_items` form small clusters
+that can be distinguished visually. 
+
+> ## Exercise
+>
+> It may be possible to enhance the appearance of the plot further by changing
+> the size of the points. Use the `size` argument to change the point size.
+> Combine this with the `width` and `height` arguments to adjust the jitter.
+>
+> Try a few different values. Which one do you like best?
+> > ## Solution
+> >
+> > Here is one possible solution.
+> > 
+> > ```{r increase-point-size}
+> > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+> >     geom_jitter(alpha = 0.5, width = 0.25, height = 0.25, size = 4)
+> > ```
+> {: .solution}
+{: .challenge}
+
 
 We can also add colors for all the points:
 
 ```{r adding-colors, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-geom_jitter(alpha = 0.5, color = "blue")
+geom_jitter(alpha = 0.5, width = 0.15, height = 0.15, color = "blue")
 ```
 
 Or to color each village in the plot differently, you could use a vector as an input to the argument **`color`**.
@@ -234,7 +256,7 @@ Here is an example where we color by **`village`**:
 
 ```{r color-by-species, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(aes(color = village), alpha = 0.5)
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.15, height = 0.15)
 ```
 
 There appears to be a positive trend between number of household
