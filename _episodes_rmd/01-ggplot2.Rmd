@@ -264,6 +264,36 @@ There appears to be a positive trend between number of household
 members and number of items owned (from the list provided). This trend
 does not appear to be different by village.
 
+You can highlight this aspect of the data by adding a regression line
+to the plot. The function `geom_smooth` allows you to add a a variety
+of different smoothing functions to the plot. You can choose the type
+of smoother to use by setting the `method` argument. Use `method='lm'`
+to get a regression line.
+
+```{r regression-line, purl=FALSE}
+ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3) +
+    geom_smooth(method='lm')
+```
+
+> ## Exercise
+>
+> Add separate regression lines for each village.
+> 
+> **Hint:** Asking *ggplot* to map `village` to an aesthetic when drawing the regression
+> lines will produce one line per village.
+>
+> > ## Solution
+> >
+> > ```{r village-regression-line, purl=FALSE}
+> > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+> >     geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3) +
+> >     geom_smooth(aes(color = village), method='lm')
+> > ```
+> {: .solution}
+{: .challenge}
+
+
 > ## Exercise
 >
 > Use what you just learned to create a scatter plot of `rooms` by `village`

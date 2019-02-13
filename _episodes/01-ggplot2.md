@@ -300,7 +300,7 @@ that can be distinguished visually.
 > > 
 > > ~~~
 > > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-> >     geom_jitter(alpha = 0.5, width = 0.25, height = 0.25, size = 4)
+> >     geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, size = 4)
 > > ~~~
 > > {: .language-r}
 > > 
@@ -314,7 +314,7 @@ We can also add colors for all the points:
 
 ~~~
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-geom_jitter(alpha = 0.5, width = 0.15, height = 0.15, color = "blue")
+geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, size = 3, color = "blue")
 ~~~
 {: .language-r}
 
@@ -330,7 +330,7 @@ Here is an example where we color by **`village`**:
 
 ~~~
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(aes(color = village), alpha = 0.5, width = 0.15, height = 0.15)
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3)
 ~~~
 {: .language-r}
 
@@ -339,6 +339,44 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 There appears to be a positive trend between number of household
 members and number of items owned (from the list provided). This trend
 does not appear to be different by village.
+
+You can highlight this aspect of the data by adding a regression line
+to the plot. The function `geom_smooth` allows you to add a a variety
+of different smoothing functions to the plot. You can choose the type
+of smoother to use by setting the `method` argument. Use `method='lm'`
+to get a regression line.
+
+
+~~~
+ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3) +
+    geom_smooth(method='lm')
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-regression-line-1.png" title="plot of chunk regression-line" alt="plot of chunk regression-line" width="612" style="display: block; margin: auto;" />
+
+> ## Exercise
+>
+> Add separate regression lines for each village.
+> 
+> **Hint:** Asking *ggplot* to map `village` to an aesthetic when drawing the regression
+> lines will produce one line per village.
+>
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
+> >     geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3) +
+> >     geom_smooth(aes(color = village), method='lm')
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-01-village-regression-line-1.png" title="plot of chunk village-regression-line" alt="plot of chunk village-regression-line" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
 
 > ## Exercise
 >
