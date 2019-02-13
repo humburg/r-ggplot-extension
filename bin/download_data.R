@@ -1,7 +1,7 @@
-if (!dir.exists("data"))
-    dir.create("data")
+if (!dir.exists("data_output"))
+    dir.create("data_output")
 
-if (! file.exists("data/SAFI_clean.csv")) {
-    download.file("https://ndownloader.figshare.com/files/11492171",
-                  "data/SAFI_clean.csv", mode = "wb")
+if (! file.exists("data_output/interviews_plotting.csv")) {
+    download.file("https://raw.githubusercontent.com/humburg/r-ggplot-project/master/data_output/interviews_plotting.csv",
+                  "data_output/interviews_plotting.csv", mode = "wb")
 }
