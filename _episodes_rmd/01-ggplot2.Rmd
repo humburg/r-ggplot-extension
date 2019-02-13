@@ -235,7 +235,7 @@ that can be distinguished visually.
 > > 
 > > ```{r increase-point-size}
 > > ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-> >     geom_jitter(alpha = 0.5, width = 0.25, height = 0.25, size = 4)
+> >     geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, size = 4)
 > > ```
 > {: .solution}
 {: .challenge}
@@ -245,7 +245,7 @@ We can also add colors for all the points:
 
 ```{r adding-colors, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-geom_jitter(alpha = 0.5, width = 0.15, height = 0.15, color = "blue")
+geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, size = 3, color = "blue")
 ```
 
 Or to color each village in the plot differently, you could use a vector as an input to the argument **`color`**.
@@ -257,7 +257,7 @@ Here is an example where we color by **`village`**:
 
 ```{r color-by-village, purl=FALSE}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(aes(color = village), alpha = 0.5, width = 0.15, height = 0.15)
+    geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3)
 ```
 
 There appears to be a positive trend between number of household
