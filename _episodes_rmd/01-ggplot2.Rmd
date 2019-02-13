@@ -208,14 +208,14 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_jitter(alpha = 0.5)
 ```
 
-That is a bit better but now the points with different *x* values can be able
+That is a bit better but now the points with similar *x* and *y* values are a
 bit difficult to distinguish. We can fix that by reducing the amount of horizontal
 jitter using the `width` argument.
 
 
 ```{r reduce-jitter}
 ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
-    geom_jitter(alpha = 0.5, width = 0.25)
+    geom_jitter(alpha = 0.5, width = 0.25, height=0.25)
 ```
 
 We can also add colors for all the points:
