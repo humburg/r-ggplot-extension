@@ -1,7 +1,7 @@
 ---
 title: "Plotting categorical data with ggplot2"
-teaching: 120
-exercises: 60
+teaching: 60
+exercises: 30
 questions:
   - "How do I create bar charts and box plots?"
   - "What are potential pitfalls when using bar charts and box plots?"

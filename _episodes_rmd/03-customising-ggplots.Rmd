@@ -1,7 +1,7 @@
 ---
 title: "Customising plots created with ggplot2"
-teaching: 120
-exercises: 60
+teaching: 60
+exercises: 30
 questions:
   - "How can I add custom titles and labels to my plot?"
   - "How can I combine multiple panels into a single plot?"

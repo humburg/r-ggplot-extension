@@ -1,7 +1,7 @@
 ---
 title: "Visualising continuous data with ggplot2"
-teaching: 120
-exercises: 60
+teaching: 60
+exercises: 30
 questions:
   - "What are the components of a ggplot?"
   - "How do I create histograms, density plots, and scatterplots?"
