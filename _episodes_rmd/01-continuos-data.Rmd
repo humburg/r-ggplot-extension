@@ -376,4 +376,14 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = stat(density), color =
     geom_freqpoly(binwidth=1)
 ```
 
+You can achieve a similar effect with density plots, using `geom_density()`.
+
+```{r room-density}
+ggplot(data = interviews_plotting, aes(x = no_membrs, color = village)) +
+    geom_density()
+```
+
+This provides a smoothed density estimate that is generally more appropriate
+for data that are less discrete.
+
 {% include links.md %}
