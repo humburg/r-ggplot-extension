@@ -357,4 +357,23 @@ ggplot(data = interviews_plotting, aes(x = no_membrs)) +
 > Is this a good plot? How could it be improved?
 {: .challenge}
 
+Stacked histograms tend to be hard to read. One alternative
+is the use of frequency polygons. To switch from histograms to frequency polygons
+simply replace `geom_histogram()` with `geom_freqpoly()`
+
+
+```{r room-freqpoly}
+ggplot(data = interviews_plotting, aes(x = no_membrs, color = village)) +
+    geom_freqpoly(binwidth=1)
+```
+
+Since the number of responses may differ between villages it can be problematic
+to compare absolute counts like this. Instead, it is better to look at densities.
+You can create the same plot as above for densities by using `stat(density)`.
+
+```{r room-freqpoly-density}
+ggplot(data = interviews_plotting, aes(x = no_membrs, y = stat(density), color = village)) +
+    geom_freqpoly(binwidth=1)
+```
+
 {% include links.md %}

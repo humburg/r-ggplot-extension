@@ -464,6 +464,35 @@ ggplot(data = interviews_plotting, aes(x = no_membrs)) +
 > > 
 > > <img src="../fig/rmd-01-room-histogram-challenge-1.png" title="plot of chunk room-histogram-challenge" alt="plot of chunk room-histogram-challenge" width="612" style="display: block; margin: auto;" />
 > {: .solution}
+>
+> Is this a good plot? How could it be improved?
 {: .challenge}
+
+Stacked histograms tend to be hard to read. One alternative
+is the use of frequency polygons. To switch from histograms to frequency polygons
+simply replace `geom_histogram()` with `geom_freqpoly()`
+
+
+
+~~~
+ggplot(data = interviews_plotting, aes(x = no_membrs, color = village)) +
+    geom_freqpoly(binwidth=1)
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-room-freqpoly-1.png" title="plot of chunk room-freqpoly" alt="plot of chunk room-freqpoly" width="612" style="display: block; margin: auto;" />
+
+Since the number of responses may differ between villages it can be problematic
+to compare absolute counts like this. Instead, it is better to look at densities.
+You can create the same plot as above for densities by using `stat(density)`.
+
+
+~~~
+ggplot(data = interviews_plotting, aes(x = no_membrs, y = stat(density), color = village)) +
+    geom_freqpoly(binwidth=1)
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-room-freqpoly-density-1.png" title="plot of chunk room-freqpoly-density" alt="plot of chunk room-freqpoly-density" width="612" style="display: block; margin: auto;" />
 
 {% include links.md %}
