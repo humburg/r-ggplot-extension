@@ -495,23 +495,6 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = stat(density), color =
 
 <img src="../fig/rmd-01-room-freqpoly-density-1.png" title="plot of chunk room-freqpoly-density" alt="plot of chunk room-freqpoly-density" width="612" style="display: block; margin: auto;" />
 
-
-~~~
-ggplot(data = interviews_plotting, aes(x = no_membrs, y = stat(density), color = village)) +
-    geom_freqpoly(binwidth=1, position = "fill")
-~~~
-{: .language-r}
-
-
-
-~~~
-Warning: Removed 6 rows containing missing values (geom_path).
-~~~
-{: .error}
-
-<img src="../fig/rmd-01-room-freqpoly-fill-1.png" title="plot of chunk room-freqpoly-fill" alt="plot of chunk room-freqpoly-fill" width="612" style="display: block; margin: auto;" />
-
-
 You can achieve a similar effect with density plots, using `geom_density()`.
 
 
