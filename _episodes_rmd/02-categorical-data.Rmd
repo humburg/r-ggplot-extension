@@ -38,7 +38,7 @@ interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
 ## Barplots
 
 Barplots are useful for visualizing categorical data. By default,
-`geom_bar` accepts a variable for x, and plots the number of instances each
+`geom_bar` accepts a variable for x, and plots the number of times each
 value of x (in this case, wall type) appears in the dataset.
 
 ```{r barplot-1}
@@ -46,12 +46,12 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
     geom_bar()
 ```
 
-We can use the `fill` aesthetic for the `geom_bar()` geom to color bars by
+You can use the `fill` aesthetic for the `geom_bar()` geom to color bars by
 the portion of each count that is from each village.
 
 ```{r barplot-stack}
-ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
-    geom_bar(aes(fill = village))
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar()
 ```
 
 This creates a stacked bar chart. These are generally more difficult to read
@@ -61,59 +61,87 @@ argument for `geom_bar()` and setting it to "dodge".
 
 
 ```{r barplot-dodge}
-ggplot(data = interviews_plotting, aes(x = respondent_wall_type)) +
-    geom_bar(aes(fill = village), position = "dodge")
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar(position = "dodge")
 ```
 
-This is a nicer graphic, but we're more likely to be interested in the
+This is a nicer graphic, but what if you're more interested in the
 proportion of each housing type in each village than in the actual count of
-number of houses of each type (because we might have sampled different numbers
-of households in each village). To compare proportions, we will first create a
-new data frame (`percent_wall_type`) with a new column named "percent"
-representing the percent of each house type in each village. We will remove
-houses with cement walls, as there was only one in the dataset.
+number of houses of each type. If you don't mind using stacked bars *ggplot*
+provides an easy solution using `position = "fill"`.
 
-
-```{r wall-type-data}
-percent_wall_type <- interviews_plotting %>%
-    filter(respondent_wall_type != "cement") %>%
-    count(village, respondent_wall_type) %>%
-    group_by(village) %>%
-    mutate(percent = n / sum(n)) %>%
-    ungroup()
+```{r barplot-fill}
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar(position = "fill")
 ```
 
-Now we can use this new data frame to create our plot showing the
-percentage of each house type in each village.
+This creates stacked bars for each wall type with the hight of the different
+colored sub-bars corresponding to the proportion of this wall type contributed
+by the three villages. Note that this changes the scale of the *y* axis,
+which is now showing proportions rather than counts. There is no corresponding
+update to the axis label, which may be confusing. You can use the `ylab()` 
+function to change that.
 
-```{r barplot-wall-type}
- ggplot(percent_wall_type, aes(x = village, y = percent, fill = respondent_wall_type)) +
-     geom_bar(stat = "identity", position = "dodge")
- ```
+```{r barplot-ylab}
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar(position = "fill") + ylab("proportion")
+```
+
+One problem with this plot is that there is no indication how many observations
+contributed to each of the bars. A possible way around this issue is to add
+the corresponding counts to the plot. This requires you to specify the counts for each group.
+These are computed by *ggplot* when creating the plot, but how can you access them
+for use in another layer? You can access this information in two different ways.
+The first relies on the use of the `stat_*` functions provided by *ggplot*. This family
+of functions provides some commonly used computed aesthetics, like the bar hight
+for a bar plot. The relevant fuction for this example is `stat_count()`. To 
+enable `stat_count()` to add content to your plot you need to tell it how the data
+should be represented via the `geom` argument. To get labels you need `geom = "text"`.
+The second method is needed when using a computed aesthetic as an argument to `aes()`.
+For this purpose *ggplot* provides the `stat()` function, which takes the name of
+the required statistic (`count` in this case) as its argument. You also need
+to account for the fact that bars are now scaled to fill the height of the
+plotting area by telling `stat_count()` to use `position = "fill"`.
+
+```{r barplot-labels-1}
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar(position = "fill") + ylab("proportion") +
+    stat_count(geom = "text", 
+             aes(label = stat(count)),
+             position="fill", colour="white")
+```
+
+This mostly works but the placement of labels at the top end of the bars isn't
+ideal. The `vjust` argument allows you to control the vertical positioning of
+text labels. Setting this to 0.5 will center the label in the available space. 
+
+```{r barplot-labels-2}
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)) +
+    geom_bar(position = "fill") + ylab("proportion") +
+    stat_count(geom = "text", 
+             aes(label = stat(count)),
+             position=position_fill(vjust=0.5), colour="white")
+```
+
 
 > ## Exercise
 >
-> Create a bar plot showing the proportion of respondents in each
-> village who are or are not part of an irrigation association
-> (`memb_assoc`). Include only respondents who answered that question
-> in the calculations and plot. Which village had the lowest proportion of
-> respondents in an irrigation association?
+> So far you've looked at how the different wall types are distributed across the
+> villages. A more interesting question might be what the makup of wall types
+> within each of the villages is and how they compare to each other.
 >
+> Create a plot that shows the proportion of wall types by village. What
+> differences do you notice?
+> 
 > > ## Solution
 > >
-> > ```{r barplot-memb-assoc}
-> > percent_memb_assoc <- interviews_plotting %>%
-> >   filter(!is.na(memb_assoc)) %>%
-> >   count(village, memb_assoc) %>%
-> >   group_by(village) %>%
-> >   mutate(percent = n / sum(n)) %>%
-> >   ungroup()
-> >
-> > ggplot(percent_memb_assoc, aes(x = village, y = percent, fill = memb_assoc)) +
-> > geom_bar(stat = "identity", position = "dodge")
+> > ```{r barplot-wall-type}
+> > ggplot(data = interviews_plotting, aes(fill = respondent_wall_type, x = village)) +
+> >     geom_bar(position = "fill") + ylab("proportion") +
+> >     stat_count(geom = "text", 
+> >              aes(label = stat(count)),
+> >              position=position_fill(vjust=0.5), colour="white")
 > > ```
-> >
-> > Ruaca had the lowest proportion of members in an irrigation association.
 > {: .solution}
 {: .challenge}
 
