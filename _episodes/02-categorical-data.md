@@ -213,7 +213,10 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)
 
 ## Boxplot
 
-We can use boxplots to visualize the distribution of rooms for each
+In an aerlier lesson you've used density plots to examine the differences in the distribution of 
+a continuous variable across different levels of a categorical variable. That can work fine for
+two or three categories but quickly becomes hard to read. Boxplots are much better suited to visualize
+of a variable across several categories. Let's look at a boxplot of the distribution of rooms for each
 wall type:
 
 
@@ -225,6 +228,22 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
 
 <img src="../fig/rmd-02-boxplot-1.png" title="plot of chunk boxplot" alt="plot of chunk boxplot" width="612" style="display: block; margin: auto;" />
 
+This is not bad, but because boxplots focus on displaying summary statistics a lot of 
+information is lost. 
+
+> ## Exercise
+> 
+> Consider the *cement* buildings in the boxplot above. Judging from
+> this plot alone, can you tell how many buildings with cement walls there
+> are in the dataset?
+>
+> > ## Solution
+> >
+> > From the plot it appears that all buildings with cement walls have three rooms
+> > but there is no way to tell whether there is 1 or 20 of them.
+> {: .solution}
+{: .challenge}
+
 By adding points to a boxplot, we can have a better idea of the number of
 measurements and of their distribution:
 
@@ -232,7 +251,7 @@ measurements and of their distribution:
 ~~~
 ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
     geom_boxplot(alpha = 0) +
-    geom_jitter(alpha = 0.5, color = "tomato")
+    geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, color = "tomato")
 ~~~
 {: .language-r}
 
@@ -247,26 +266,6 @@ hidden?
 
 > ## Exercise
 >
-> Boxplots are useful summaries, but hide the *shape* of the distribution. For
-> example, if the distribution is bimodal, we would not see it in a
-> boxplot. An alternative to the boxplot is the violin plot, where the shape
-> (of the density of points) is drawn.
->
-> - Replace the box plot with a violin plot; see `geom_violin()`.
-> 
-> > ## Solution
-> >
-> > 
-> > ~~~
-> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
-> >   geom_violin(alpha = 0) +
-> >   geom_jitter(alpha = 0.5, color = "tomato")
-> > ~~~
-> > {: .language-r}
-> > 
-> > <img src="../fig/rmd-02-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
-> {: .solution}
->
 > So far, we've looked at the distribution of room number within wall type. Try
 > making a new plot to explore the distribution of another variable within wall
 > type.
@@ -279,7 +278,7 @@ hidden?
 > > ~~~
 > > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(alpha = 0.5)
+> >   geom_jitter(alpha = 0.5, width = 0.2, height = 0.2)
 > > ~~~
 > > {: .language-r}
 > > 
@@ -292,13 +291,50 @@ hidden?
 > > ## Solution
 > > 
 > > ~~~
-> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
+> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count, color = memb_assoc)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(aes(color = memb_assoc), alpha = 0.5)
+> >   geom_jitter(, alpha = 0.5, width = 0.2, height = 0.2)
 > > ~~~
 > > {: .language-r}
 > > 
 > > <img src="../fig/rmd-02-boxplot-exercise-factor-1.png" title="plot of chunk boxplot-exercise-factor" alt="plot of chunk boxplot-exercise-factor" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
+In the boxplot you created during the exercise above you used different colored points
+to highlight groupings according to a second categorical variable. A better way to
+compare these categories is to add more boxes to the plot.
+
+
+~~~
+ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count, fill = memb_assoc, color = memb_assoc)) +
+  geom_boxplot(alpha = 0.5) +
+  geom_point(alpha = 0.5, position = position_jitterdodge(jitter.width = 0.1, jitter.height = 0.1))
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-02-boxplot-two-factor-1.png" title="plot of chunk boxplot-two-factor" alt="plot of chunk boxplot-two-factor" width="612" style="display: block; margin: auto;" />
+
+> ## Exercise
+>
+> Boxplots are useful summaries, but hide the *shape* of the distribution. For
+> example, if the distribution is bimodal, we would not see it in a
+> boxplot. An alternative to the boxplot is the violin plot, where the shape
+> (of the density of points) is drawn.
+>
+> - Replace the box plot of rooms by wall type with a violin plot; see `geom_violin()`.
+> 
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = rooms)) +
+> >     geom_violin(alpha = 0) +
+> >     geom_jitter(alpha = 0.5, width = 0.2, height = 0.2, color = "tomato")
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-02-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
