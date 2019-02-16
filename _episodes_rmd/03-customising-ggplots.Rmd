@@ -298,14 +298,16 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count,
 
 > ## Exercise
 >
-> With all of this information in hand, please take another five minutes to
-> either improve one of the plots generated in this exercise or create a
-> beautiful graph of your own. Use the RStudio [**`ggplot2`** cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
-> for inspiration. Here are some ideas:
+> With all of this information in hand, take some time to eplore the
+> dataset. Can you identify an aspect of the data that may be interesting 
+> to visualise? 
 >
-> * See if you can make the bars white with black outline.
-> * Try using a different color palette (see
->   http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/).
+> Create an informative and visually appealing plot that showcases this
+> aspect of the data. The [ggplot cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+> and the [R graph gallery](https://www.r-graph-gallery.com/) may provide some inspiration.
+>
+> **Note:** Feel free to transform the data or compute derived variables
+> as necessary.
 {: .challenge}
 
 {% include links.md %}
