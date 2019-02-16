@@ -386,30 +386,4 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count,
 >   http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/).
 {: .challenge}
 
-After creating your plot, you can save it to a file in your favorite format. The Export tab in the **Plot** pane in RStudio will save your plots at low resolution, which will not be accepted by many journals and will not scale well for posters.
-
-Instead, use the `ggsave()` function, which allows you easily change the dimension and resolution of your plot by adjusting the appropriate arguments (`width`, `height` and `dpi`).
-
-Make sure you have the `fig_output/` folder in your working directory.
-
-
-~~~
-my_plot <- ggplot(percent_items, aes(x = village, y = percent)) +
-    geom_bar(stat = "identity", position = "dodge") +
-    facet_wrap(~ items) +
-    labs(title = "Percent of respondents in each village \n who owned each item",
-         x = "Village",
-         y = "Percent of Respondents") +
-    theme_bw() +
-    theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 45, hjust = 0.5, vjust = 0.5),
-          axis.text.y = element_text(colour = "grey20", size = 12),
-          text = element_text(size = 16),
-          plot.title = element_text(hjust = 0.5))
-
-ggsave("fig_output/name_of_file.png", my_plot, width = 15, height = 10)
-~~~
-{: .language-r}
-
-Note: The parameters `width` and `height` also determine the font size in the saved plot.
-
 {% include links.md %}
