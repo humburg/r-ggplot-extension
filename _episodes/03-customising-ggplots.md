@@ -146,7 +146,7 @@ ggplot(data = interviews_plotting, aes(fill = respondent_wall_type, x = village)
 
 <img src="../fig/rmd-03-barplot-wall-type-scale-1.png" title="plot of chunk barplot-wall-type-scale" alt="plot of chunk barplot-wall-type-scale" width="612" style="display: block; margin: auto;" />
 
-## Faceting
+## Facetting
 
 Rather than creating a single plot with side-by-side bars you may want
 to create multiple plots. This is especially true if you want to display
@@ -164,7 +164,7 @@ ggplot(data = interviews_plotting, aes(fill = memb_assoc, x = respondent_wall_ty
     stat_count(geom = "text", 
              aes(label = stat(count)),
              position=position_fill(vjust=0.5), colour="white") +
-    ylab("Proportion") + xlab("Village") + ggtitle("Proportion of irrigation association membership by village") +
+    ylab("Proportion") + xlab("Wall type") + ggtitle("Proportion of irrigation association membership by wall type") +
     facet_wrap( ~ village)
 ~~~
 {: .language-r}
@@ -187,7 +187,7 @@ ggplot(data = interviews_plotting, aes(fill = memb_assoc, x = respondent_wall_ty
     stat_count(geom = "text", 
              aes(label = stat(count)),
              position=position_fill(vjust=0.5), colour="white") +
-    ylab("Proportion") + xlab("Village") + ggtitle("Proportion of irrigation association membership by village") +
+    ylab("Proportion") + xlab("Wall type") + ggtitle("Proportion of irrigation association membership by wall type") +
     facet_wrap( ~ village, nrow = 2)
 ~~~
 {: .language-r}
@@ -195,7 +195,38 @@ ggplot(data = interviews_plotting, aes(fill = memb_assoc, x = respondent_wall_ty
 <img src="../fig/rmd-03-barplot-facet-rows-1.png" title="plot of chunk barplot-facet-rows" alt="plot of chunk barplot-facet-rows" width="612" style="display: block; margin: auto;" />
 
 That looks a bit better. It also has the benefit of making the labels
-a bit more readable. A good stratagey to deal with *x*-axis labels that
+a bit more readable. 
+
+> ## Exercise
+> 
+> Adjust the legend title and wall type labels as you did before.
+> Which `scale_*()` function do you have to use to adjust the labels now?
+>
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > ggplot(data = interviews_plotting, aes(fill = memb_assoc, x = respondent_wall_type)) +
+> >     geom_bar(position = "fill") +
+> >     stat_count(geom = "text", 
+> >              aes(label = stat(count)),
+> >              position=position_fill(vjust=0.5), colour="white") +
+> >     ylab("Proportion") + xlab("Village") + 
+> >     ggtitle("Proportion of irrigation association membership by village") +
+> >     scale_x_discrete(labels = c("burnt bricks", "cement", "mud daub", "sun bricks")) + 
+> >     guides(fill=guide_legend(title = "Association member")) +
+> >     facet_wrap( ~ village, nrow = 2)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-03-barplot-facet-rows-exercise-1.png" title="plot of chunk barplot-facet-rows-exercise" alt="plot of chunk barplot-facet-rows-exercise" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
+
+## Themes
+
+A good stratagey to deal with *x*-axis labels that
 are to long for the available space is to rotate them by 45$^\circ$.
 
 
@@ -212,8 +243,6 @@ ggplot(data = interviews_plotting, aes(fill = memb_assoc, x = respondent_wall_ty
 {: .language-r}
 
 <img src="../fig/rmd-03-barplot-facet-rotate-1.png" title="plot of chunk barplot-facet-rotate" alt="plot of chunk barplot-facet-rotate" width="612" style="display: block; margin: auto;" />
-
-
 
 Click the "Zoom" button in your RStudio plots pane to view a larger
 version of this plot.
@@ -281,8 +310,6 @@ ggplot(percent_items, aes(x = village, y = percent)) +
 {: .language-r}
 
 <img src="../fig/rmd-03-percent-items-barplot-1.png" title="plot of chunk percent-items-barplot" alt="plot of chunk percent-items-barplot" width="612" style="display: block; margin: auto;" />
-
-## **`ggplot2`** themes
 
 In addition to `theme_bw()`, which changes the plot background to white,
 **`ggplot2`** comes with several other themes which can be useful to quickly
