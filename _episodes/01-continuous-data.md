@@ -431,6 +431,14 @@ Error in grDevices::png(..., res = dpi, units = "in"): unable to start png() dev
 ~~~
 {: .error}
 
+> ## Exercise
+>
+> Commit this revised version of the plot to git and push your changes to
+> your GitHub repository.
+> 
+> Go to GitHub and find the your last commit. Examine the differences between 
+> the versions of your plot in the diff viewer.
+{: .challenge}
 
 > ## Exercise
 >
