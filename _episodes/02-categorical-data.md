@@ -291,9 +291,9 @@ hidden?
 > > ## Solution
 > > 
 > > ~~~
-> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count, color = memb_assoc)) +
+> > ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count)) +
 > >   geom_boxplot(alpha = 0) +
-> >   geom_jitter(, alpha = 0.5, width = 0.2, height = 0.2)
+> >   geom_jitter(aes(color = memb_assoc), alpha = 0.5, width = 0.2, height = 0.2)
 > > ~~~
 > > {: .language-r}
 > > 
