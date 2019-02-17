@@ -312,7 +312,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
 This will be the last version of this plot you look at today. That seems like
 a good time to save the product of your work.
 
-```{r village-save-result, purl=FALSE}
+```{r village-save-result, purl=FALSE, eval=FALSE}
 membrs_item_plot <- ggplot(data = interviews_plotting, aes(x = no_membrs, y = number_items)) +
     geom_jitter(aes(color = village), alpha = 0.5, width = 0.2, height = 0.2, size = 3) +
     geom_smooth(aes(color = village), method='lm')
