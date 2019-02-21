@@ -384,6 +384,20 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, y = liv_count,
 > aspect of the data. The [ggplot cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > and the [R graph gallery](https://www.r-graph-gallery.com/) may provide some inspiration.
 >
+> Here are some ideas you might explore:
+>
+> * Take another look at the scatterplot of household size and number of items owned you created this morning. Can you use 
+>   `geom_count()` to improve this plot?
+> * Create a plot showing how often respondents have been involved in conflicts with other irrigators (`affect_conflicts`).
+>   Does this differ between those that are members of an irrigation association and those that aren't?
+>     - What type of plot is best suited for this?
+>     - Is the order in which `ggplot()` presents the factor levels appropriate? How could you change that? 
+> * To what extend does the number of months a household has not had sufficient food during the last year (`number_month_lack_food`)
+>   affect the number of meals members of the household have per day?
+>     - Does this differ between villages?
+>     - Note that the responses for `number_month_lack_food` are always recorded as whole months. Can you adjust the grid lines
+>       in the plot to only occur at values that are valid responses?
+>
 > **Note:** Feel free to transform the data or compute derived variables
 > as necessary.
 {: .challenge}
