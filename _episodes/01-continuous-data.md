@@ -408,29 +408,6 @@ ggsave("fig_output/membrs_item.png", membrs_item_plot, width = 15, height = 10)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Warning in grDevices::png(..., res = dpi, units = "in"): unable to open
-file 'fig_output/membrs_item.png' for writing
-~~~
-{: .error}
-
-
-
-~~~
-Warning in grDevices::png(..., res = dpi, units = "in"): opening device
-failed
-~~~
-{: .error}
-
-
-
-~~~
-Error in grDevices::png(..., res = dpi, units = "in"): unable to start png() device
-~~~
-{: .error}
-
 > ## Exercise
 >
 > Commit this revised version of the plot to git and push your changes to
