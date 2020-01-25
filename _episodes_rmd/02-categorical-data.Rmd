@@ -75,7 +75,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)
     geom_bar(position = "fill")
 ```
 
-This creates stacked bars for each wall type with the hight of the different
+This creates stacked bars for each wall type with the height of the different
 colored sub-bars corresponding to the proportion of this wall type contributed
 by the three villages. Note that this changes the scale of the *y* axis,
 which is now showing proportions rather than counts. There is no corresponding
@@ -93,7 +93,7 @@ the corresponding counts to the plot. This requires you to specify the counts fo
 These are computed by *ggplot* when creating the plot, but how can you access them
 for use in another layer? You can access this information in two different ways.
 The first relies on the use of the `stat_*` functions provided by *ggplot*. This family
-of functions provides some commonly used computed aesthetics, like the bar hight
+of functions provides some commonly used computed aesthetics, like the bar height
 for a bar plot. The relevant fuction for this example is `stat_count()`. To 
 enable `stat_count()` to add content to your plot you need to tell it how the data
 should be represented via the `geom` argument. To get labels you need `geom = "text"`.
@@ -127,7 +127,7 @@ ggplot(data = interviews_plotting, aes(x = respondent_wall_type, fill = village)
 > ## Exercise
 >
 > So far you've looked at how the different wall types are distributed across the
-> villages. A more interesting question might be what the makup of wall types
+> villages. A more interesting question might be what the makeup of wall types
 > within each of the villages is and how they compare to each other.
 >
 > Create a plot that shows the proportion of wall types by village. What
