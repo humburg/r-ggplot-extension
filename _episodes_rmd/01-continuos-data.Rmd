@@ -13,7 +13,7 @@ keypoints:
    - "`ggplot2` is a flexible and useful tool for creating plots in R."
    - "The data set and coordinate system can be defined using the `ggplot` function."
    - "Additional layers, including geoms, are added using the `+` operator."
-   - "Histograms and density plots are useful tools to visualise the distribution a a continuous variable."
+   - "Histograms and density plots are useful tools to visualise the distribution of a continuous variable."
    - "Scatterplots can be useful in understanding the relationship between two continuous variables."
 ---
 
@@ -370,7 +370,7 @@ ggplot(data = interviews_plotting, aes(x = no_membrs)) +
     geom_histogram(binwidth=1)
 ```
 
-That's a bit better but it is difficult to distinguish adjacent bars of the same hight.
+That's a bit better but it is difficult to distinguish adjacent bars of the same height.
 That is easily fixed by setting `color = "white"`.
 
 
