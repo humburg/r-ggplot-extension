@@ -86,6 +86,8 @@ ggplot(data = interviews_plotting)
 > We would like to inspect the data for a potential relationship between the number of
 > people living in a household (`no_members`) and the number of items owned by that
 > household (`number_items`). What would be a good way to visualise these data?
+> NOTE that the variable (`no_members`) is actually spelt (`no_membrs`) in the dataset. So the
+> incorrect spelling must be used in your code. 
 >
 > > ## Solution
 > >
